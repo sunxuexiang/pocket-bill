@@ -8,6 +8,7 @@ public class PocketBillApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(PocketBillApplication.class, args);
+		System.out.println(1111);
 	}
 
 }
