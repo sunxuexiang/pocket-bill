@@ -14,6 +14,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="base-common" target="1.8" />
+      <module name="demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
@@ -24,6 +25,7 @@
       <module name="bill-details" options="-parameters" />
       <module name="bill-gather" options="-parameters" />
       <module name="bill-self" options="-parameters" />
+      <module name="demo" options="-parameters" />
     </option>
   </component>
 </project>
