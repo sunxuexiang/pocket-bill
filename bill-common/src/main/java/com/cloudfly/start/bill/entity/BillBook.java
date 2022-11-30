@@ -8,7 +8,6 @@ import lombok.Data;
 import java.io.Serializable;
 import java.util.Date;
 
-@Data
 @TableName("bill_book")
 public class BillBook implements Serializable {
     private static final long serialVersionUID = 1L;

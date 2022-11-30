@@ -1,5 +1,6 @@
 package com.cloudfly.start.bill.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
@@ -9,6 +10,7 @@ import java.util.Date;
 @TableName("bill_user")
 public class BillUser {
 
+    @TableId
     private Integer userId;
     private String userName;
     private String userImg;

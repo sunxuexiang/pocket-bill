@@ -6,7 +6,6 @@ import lombok.Data;
 
 import java.util.Date;
 
-@Data
 @TableName( "bill_book_info")
 public class BillBookInfo {
 
