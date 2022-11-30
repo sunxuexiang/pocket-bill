@@ -1,15 +1,16 @@
 package com.cloudfly.start.bill.entity;
 
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
-@Data
 @TableName(value = "bill_integral")
 public class BillIntegral {
 
+    @TableId
     private Integer integralId;
     private Integer integralUserId;
     private String integralInfo;

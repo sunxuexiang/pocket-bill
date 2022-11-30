@@ -1,14 +1,14 @@
 package com.cloudfly.start.bill.entity;
 
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.util.Date;
 
-@Data
 @TableName("bill_pay")
 public class BillPay {
-
+    @TableId
     private Integer payId;
     private String payType;
     private Date createDate;
