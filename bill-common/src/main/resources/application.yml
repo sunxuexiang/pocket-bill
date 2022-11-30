@@ -20,12 +20,11 @@
 #spring.datasource.druid.filter.stat.merge-sql=false
 #spring.datasource.druid.filter.wall.config.multi-statement-allow=true
 spring:
-  # ˝æ›ø‚≈‰÷√
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/pockit-bill?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://192.168.1.2:3306/pockit-bill?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
       username: root
       password: root1234
       initial-size: 10

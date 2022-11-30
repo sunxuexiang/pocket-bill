@@ -9,6 +9,7 @@ public class GatherController {
 
     @RequestMapping("/getGather")
     public String getDetails(){
+
         return "2022年11月30号 ";
     }
 }
