@@ -2,6 +2,7 @@ package com.cloudfly.start.bill.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloudfly.start.bill.dao.BillBookDao;
+import com.cloudfly.start.bill.entity.BillBook;
 import com.cloudfly.start.bill.service.BillBookService;
 import org.springframework.stereotype.Service;
 
