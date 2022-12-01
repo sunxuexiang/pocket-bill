@@ -1,9 +1,6 @@
 package com.cloudfly.start.bill.config;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -11,14 +8,13 @@ import org.springframework.context.annotation.Primary;
 import javax.sql.DataSource;
 
 @Configuration
-//@EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
-public class DataSourceConfig {
+public class CommonConfig {
 
     @Bean
     @Primary
     public DataSource druidDataSrouce(){
         DruidDataSource dds=new DruidDataSource();
-        dds.setUrl("jdbc:mysql://localhost:3306/pockit-bill?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai");
+        dds.setUrl("jdbc:mysql://192.168.1.2:3306/pockit-bill?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai");
         dds.setUsername("root");
         dds.setPassword("root1234");
         dds.setInitialSize(10);

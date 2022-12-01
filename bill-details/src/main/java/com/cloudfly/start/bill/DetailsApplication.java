@@ -1,14 +1,14 @@
 package com.cloudfly.start.bill;
 
-import com.cloudfly.start.bill.config.DataSourceConfig;
+import com.cloudfly.start.bill.config.CommonConfig;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Import;
 
 @SpringBootApplication
-@Import({DataSourceConfig.class})
+@Import({CommonConfig.class})
+@EnableFeignClients
 public class DetailsApplication {
 
 	public static void main(String[] args) {
