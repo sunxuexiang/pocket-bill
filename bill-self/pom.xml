@@ -10,9 +10,9 @@
 
 	<parent>
 		<groupId>com.cloudfly.start.bill</groupId>
-		<artifactId>bill-base</artifactId>
+		<artifactId>pocket-bill</artifactId>
 		<version>1.0-SNAPSHOT</version>
-		<relativePath>../bill-base/pom.xml</relativePath>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<properties>
