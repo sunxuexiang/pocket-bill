@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 @Service("billBookService")
 public class BillBookServiceImpl extends ServiceImpl<BillBookDao,BillBook> implements BillBookService {
 
-    @Override
     public String queryById(int id) {
         BillBook byId = this.getById(id);
         return null;

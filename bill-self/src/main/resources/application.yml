@@ -1,2 +1,4 @@
 server:
   port: 8083
+wechat:
+  url: https://api.weixin.qq.com/sns/jscode2session?appid=wx9bd73e9dcf008f08&secret=a16d33d9d0710e7e7420218ec9bb773f&js_code=JSCODE&grant_type=authorization_code
