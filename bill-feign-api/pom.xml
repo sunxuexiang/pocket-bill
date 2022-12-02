@@ -2,13 +2,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-
-
-	<artifactId>bill-details</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>bill-details</name>
-	<description>pocket bill for details</description>
-
 	<parent>
 		<groupId>com.cloudfly.start.bill</groupId>
 		<artifactId>pocket-bill</artifactId>
@@ -16,10 +9,14 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
+	<artifactId>bill-feign-api</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>bill-feign-api</name>
+	<description>bill service for feign api</description>
+
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
-
 	<dependencies>
 		<dependency>
 			<groupId>com.cloudfly.start.bill</groupId>
@@ -28,34 +25,9 @@
 		</dependency>
 
 		<dependency>
-			<groupId>com.alibaba</groupId>
-			<artifactId>fastjson</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.alibaba.cloud</groupId>
-			<artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.cloudfly.start.bill</groupId>
-			<artifactId>bill-feign-api</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-
 	</dependencies>
 
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
 </project>

@@ -1,8 +1,7 @@
 package com.cloudfly.start.bill.controller;
 
-import com.cloudfly.start.bill.dao.BillBookDao;
+import com.cloudfly.start.bill.remoteapi.GatherFeignService;
 import com.cloudfly.start.bill.service.BillBookService;
-import com.cloudfly.start.bill.service.RemoteGatherServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,14 +18,14 @@ public class DetailsController {
     private BillBookService billBookService;
 
     @Autowired
-    private RemoteGatherServiceImpl remoteGatherServiceImpl;
+    private GatherFeignService gatherFeignService;
 
     @RequestMapping("/getDetails")
     public String getDetails(){
         System.out.println(username);
-        String s = billBookService.queryById(1);
-        System.out.println(remoteGatherServiceImpl.getGather());
-        System.out.println(s);
+       // String s = billBookService.queryById(1);
+        System.out.println(gatherFeignService.getGather());
+       // System.out.println(s);
         return "账单详情";
     }
 }

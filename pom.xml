@@ -19,6 +19,7 @@
 		<module>bill-details</module>
 		<module>bill-gather</module>
 		<module>bill-self</module>
+		<module>bill-feign-api</module>
 	</modules>
 
 	<properties>

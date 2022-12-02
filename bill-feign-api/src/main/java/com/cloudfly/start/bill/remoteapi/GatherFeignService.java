@@ -1,13 +1,13 @@
-package com.cloudfly.start.bill.service;
+package com.cloudfly.start.bill.remoteapi;
 
-
-import com.cloudfly.start.bill.entity.BillBook;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @FeignClient(value="bill-gather")
-public interface RemoteGatherServiceImpl {
+public interface GatherFeignService {
+
 
     @RequestMapping("/gatherController/getGather")
-    public String getGather();
+    String getGather();
+
 }
