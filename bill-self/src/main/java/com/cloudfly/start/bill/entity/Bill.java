@@ -1,4 +1,4 @@
-package com.cloudfly.start.bill.dao;
+package com.cloudfly.start.bill.entity;
 
 import java.util.Date;
 
@@ -7,7 +7,7 @@ import java.util.Date;
  * @author: Hulk
  * @date : 0420:02
  */
-public class BillDao {
+public class Bill {
 
     private Integer billId;
     private Integer bookType;

@@ -1,9 +1,9 @@
-package com.cloudfly.start.bill.dao;
+package com.cloudfly.start.bill.entity;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class BillShareDao {
+public class BillShareBase {
 
     private Integer shareId;
     private String userImg;

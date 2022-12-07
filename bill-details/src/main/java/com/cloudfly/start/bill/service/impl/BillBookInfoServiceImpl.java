@@ -1,11 +1,13 @@
 package com.cloudfly.start.bill.service.impl;
 
+
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.cloudfly.start.bill.dao.BillBookInfoDao;
 import com.cloudfly.start.bill.entity.BillBookInfo;
+import com.cloudfly.start.bill.mapper.BillBookInfoMapper;
 import com.cloudfly.start.bill.service.BillBookInfoService;
 
-public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoDao, BillBookInfo> implements BillBookInfoService {
+public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, BillBookInfo> implements BillBookInfoService  {
+
     /**
      * @param billBookInfo
      */

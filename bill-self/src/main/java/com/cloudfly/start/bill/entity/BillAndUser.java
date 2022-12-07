@@ -1,13 +1,11 @@
-package com.cloudfly.start.bill.dao;
-
-import com.cloudfly.start.bill.entity.BillBook;
+package com.cloudfly.start.bill.entity;
 
 import java.util.List;
 
-public class BillAndUserDao {
+public class BillAndUser {
 
     private BillBook billBook;
-    private List<BillShareDao> billUsers;
+    private List<BillShareBase> billUsers;
 
     public BillBook getBillBook() {
         return billBook;
@@ -17,11 +15,11 @@ public class BillAndUserDao {
         this.billBook = billBook;
     }
 
-    public List<BillShareDao> getBillUsers() {
+    public List<BillShareBase> getBillUsers() {
         return billUsers;
     }
 
-    public void setBillUsers(List<BillShareDao> billUsers) {
+    public void setBillUsers(List<BillShareBase> billUsers) {
         this.billUsers = billUsers;
     }
 }

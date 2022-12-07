@@ -2,7 +2,13 @@ package com.cloudfly.start.bill.report.base;
 
 
 
+import com.cloudfly.start.bill.mapper.BillBookReportGatherMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+
 public abstract class BaseBillReportServiceAbs implements BaseBillReportService {
+
+    @Autowired
+    private BillBookReportGatherMapper billReportMapper;
 
     private String reportType;
 
@@ -18,6 +24,7 @@ public abstract class BaseBillReportServiceAbs implements BaseBillReportService 
         this.setReportBaseData(reportType);
         String startTime=countQueryStartDate();
         String endTime=countQueryEndDate();
+        billReportMapper.generateReport(startTime,endTime);
     }
 
     public abstract String countQueryStartDate();

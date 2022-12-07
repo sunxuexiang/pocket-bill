@@ -1,15 +1,12 @@
 package com.cloudfly.start.bill.controller;
 
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RequestMapping("/gatherController")
+@RequestMapping("/bookAnnualSummaryController")
 @RestController
-public class GatherController {
+public class BillBookAnnualSummaryController {
 
-    @RequestMapping("/getGather")
-    public String getDetails(){
 
-        return "2022年11月30号 ";
-    }
 }

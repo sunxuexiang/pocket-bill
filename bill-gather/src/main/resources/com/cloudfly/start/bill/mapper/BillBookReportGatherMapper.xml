@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
-<mapper namespace="com.cloudfly.start.bill.mapper.BillReportDao">
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cloudfly.start.bill.mapper.BillBookReportGatherMapper">
 
     <select id="generateReport" resultType="com.cloudfly.start.bill.entity.BillBookInfo">
         select * from bill_book_info bbi
-                 where bbi.create_date <![CDATA[ >= ]]> #{startTime}
-                and bbi.create_date <![CDATA[ <= ]]> #{endTime}
+        where bbi.create_date <![CDATA[ >= ]]> #{startTime}
+          and bbi.create_date <![CDATA[ <= ]]> #{endTime}
     </select>
 </mapper>
