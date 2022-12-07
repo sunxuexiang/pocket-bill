@@ -1,5 +1,6 @@
 package com.cloudfly.start.bill.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -10,11 +11,13 @@ import java.util.Date;
 @TableName("bill_share")
 public class BillShare {
 
-    @TableId
+    @TableId(value = "share_id", type= IdType.AUTO)
     private Integer shareId;
     private Integer shareBookId;
     private Integer shareUserId;
     private Integer sharePower;
+    private Integer userId;
+    private String bookType;
     private Date createDate;
     private int createBy;
     private Date updateDate;
@@ -84,8 +87,18 @@ public class BillShare {
         this.updateBy = updateBy;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
+    public String getBookType() {
+        return bookType;
+    }
 
-
-
+    public void setBookType(String bookType) {
+        this.bookType = bookType;
+    }
 }

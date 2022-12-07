@@ -1,6 +1,7 @@
 package com.cloudfly.start.bill.entity;
 
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -12,11 +13,11 @@ import java.util.Date;
 public class BillBook implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @TableId
+    @TableId(value = "book_id", type = IdType.AUTO)
     private int bookId;
     private int userId;
-    private String bookType;
     private String bookName;
+    private String bookRemark;
     private Date createDate;
     private int createBy;
     private Date updateDate;
@@ -36,14 +37,6 @@ public class BillBook implements Serializable {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public String getBookType() {
-        return bookType;
-    }
-
-    public void setBookType(String bookType) {
-        this.bookType = bookType;
     }
 
     public String getBookName() {
@@ -84,5 +77,13 @@ public class BillBook implements Serializable {
 
     public void setUpdateBy(int updateBy) {
         this.updateBy = updateBy;
+    }
+
+    public String getBookRemark() {
+        return bookRemark;
+    }
+
+    public void setBookRemark(String bookRemark) {
+        this.bookRemark = bookRemark;
     }
 }

@@ -1,5 +1,6 @@
 package com.cloudfly.start.bill.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -10,8 +11,9 @@ import java.util.Date;
 @TableName("bill_user")
 public class BillUser {
 
-    @TableId
+    @TableId(value = "user_id",type= IdType.AUTO)
     private Integer userId;
+    private String userOpenid;
     private String userName;
     private String userImg;
     private String userSex;
@@ -100,5 +102,13 @@ public class BillUser {
 
     public void setUpdateBy(int updateBy) {
         this.updateBy = updateBy;
+    }
+
+    public String getUserOpenid() {
+        return userOpenid;
+    }
+
+    public void setUserOpenid(String userOpenid) {
+        this.userOpenid = userOpenid;
     }
 }
