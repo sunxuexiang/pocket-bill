@@ -19,11 +19,17 @@ import java.util.Map;
  *
  * @author Fox
  */
+
 public class R extends HashMap<String, Object> {
 	private static final long serialVersionUID = 1L;
 	
 	public R() {
 		put("code", 0);
+		put("msg", "success");
+	}
+
+	public R(int code) {
+		put("code", code);
 		put("msg", "success");
 	}
 	
@@ -43,25 +49,25 @@ public class R extends HashMap<String, Object> {
 	}
 
 	public static R ok(String msg) {
-		R r = new R();
+		R r = new R(HttpStatus.SC_OK);
 		r.put("msg", msg);
 		return r;
 	}
 	
 	public static R ok(Map<String, Object> map) {
-		R r = new R();
+		R r = new R(HttpStatus.SC_OK);
 		r.putAll(map);
 		return r;
 	}
 
 	public static R ok(Object o) {
-		R r = new R();
+		R r = new R(HttpStatus.SC_OK);
 		r.put("msg",o);
 		return r;
 	}
 	
 	public static R ok() {
-		return new R();
+		return new R(HttpStatus.SC_OK);
 	}
 
 	public R put(String key, Object value) {

@@ -1,6 +1,8 @@
 package com.cloudfly.start.bill.config;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.transaction.SpringManagedTransactionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -12,11 +14,12 @@ import java.io.IOException;
 public class GatherBaseConfiguration {
 
     @Bean
-    public SqlSessionFactoryBean sqlSessionFactory(DataSource druidDataSource) throws IOException {
-        SqlSessionFactoryBean ssfb=new SqlSessionFactoryBean();
-        ssfb.setDataSource(druidDataSource);
+    public SqlSessionFactory sqlSessionFactory(DataSource druidDataSource) throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean=new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(druidDataSource);
         PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        ssfb.setMapperLocations(resolver.getResources("classpath:com/cloudfly/start/bill/mapper/*.xml"));
-        return ssfb;
+        sqlSessionFactoryBean.setMapperLocations(resolver.getResources("classpath*:/com/cloudfly/start/bill/mapper/*.xml"));
+        sqlSessionFactoryBean.setTransactionFactory(new SpringManagedTransactionFactory());
+        return sqlSessionFactoryBean.getObject();
     }
 }
