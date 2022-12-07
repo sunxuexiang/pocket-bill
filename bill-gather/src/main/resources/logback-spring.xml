@@ -3,7 +3,9 @@
 
     <contextName>logback</contextName>
 
-    <property name="log.path" value="D:\\logs\\bill-details.log" />
+    <springProperty name="log.path" source="logging.file.path" defaultValue="/home/admin/bill-gather/logs" />
+
+    <springProperty name="log.name" source="logging.file.name" defaultValue="bill-gather.log" />
 
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
@@ -13,7 +15,7 @@
     </appender>
 
     <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}</file>
+        <file>${log.path}\\${log.name}</file>
 
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
@@ -24,7 +26,7 @@
             <!-- rollover daily -->
             <!--如果第二天输出日志,会将当天的日志记录在<file>${log.path}/log_debug.log</file>,然后将昨天的日志归档到下面的文件中-->
             <!--以分钟切分  %d{yyyy-MM-dd_HH-mm}-->
-            <fileNamePattern>${log.path}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
+            <fileNamePattern>${log.path}\\${log.name}.%d{yyyy-MM-dd}.%i.gz</fileNamePattern>
             <!-- each file should be at most 100MB, keep 60 days worth of history, but at most 20GB -->
             <!--单个日志文件最大100M，到了这个值，就会再创建一个日志文件，日志文件的名字最后+1-->
             <maxFileSize>10MB</maxFileSize>
