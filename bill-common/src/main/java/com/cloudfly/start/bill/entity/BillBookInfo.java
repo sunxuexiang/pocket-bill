@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @TableName( "bill_book_info")
-public class BillBookInfo {
+public class BillBookInfo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @TableId
     private Integer infoId;
