@@ -2,16 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloudfly.start.bill.mapper.BillShareMapper">
 
-    <resultMap id="shareList" type="com.cloudfly.start.bill.dao.BillAndUserDao">
-        <collection property="billUsers" ofType="com.cloudfly.start.bill.dao.BillShareDao">
-            <result column="userId" property="userId"/>
-            <result column="userName" property="userName"/>
-            <result column="userImg" property="userImg"/>
-            <result column="shareId" property="shareId"/>
+    <resultMap id="billAndUserDao" type="com.cloudfly.start.bill.dao.BillAndUserDao">
+        <collection property="billUsers" ofType="com.cloudfly.start.bill.dao.BillShareDao" javaType="java.util.List">
+            <result column="user_id"  property="userId"/>
+            <result column="user_name"  property="userName"/>
+            <result column="user_img"  property="userImg"/>
+            <result column="share_id"  property="shareId"/>
         </collection>
     </resultMap>
-    
-    <select id="queryByBillAndUserId" resultType="shareList" parameterType="java.lang.Integer">
+
+    <select id="queryByBillAndUserId" resultMap="billAndUserDao" parameterType="java.lang.Integer">
         select * from bill_user user inner join bill_share share on user_id = share.share_user_id
         where share.share_id = #{billBookId}
     </select>
