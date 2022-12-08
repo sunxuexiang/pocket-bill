@@ -2,17 +2,21 @@ package com.cloudfly.start.bill.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @TableName( "bill_book_info")
-public class BillBookInfo {
+public class BillBookInfo implements Serializable {
+
+    private static final long serialVersionUID = 1L;
 
     @TableId
     private Integer infoId;
-    private String infoUserId;
-    private String infoBookId;
+
+    private String userId;
+
+    private String bookId;
     private String infoPayId;
     private String infoTypeId;
     private Double infoMoney;
@@ -33,20 +37,20 @@ public class BillBookInfo {
         this.infoId = infoId;
     }
 
-    public String getInfoUserId() {
-        return infoUserId;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setInfoUserId(String infoUserId) {
-        this.infoUserId = infoUserId;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getInfoBookId() {
-        return infoBookId;
+    public String getBookId() {
+        return bookId;
     }
 
-    public void setInfoBookId(String infoBookId) {
-        this.infoBookId = infoBookId;
+    public void setBookId(String bookId) {
+        this.bookId = bookId;
     }
 
     public String getInfoPayId() {

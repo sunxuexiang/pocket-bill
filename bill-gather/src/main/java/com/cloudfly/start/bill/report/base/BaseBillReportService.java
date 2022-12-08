@@ -1,5 +1,6 @@
 package com.cloudfly.start.bill.report.base;
 
 public interface BaseBillReportService {
-     void setReportBaseData();
+
+     void setReportBaseData(String reportType);
 }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.cloudfly.start.bill.mapper.BillBookAnnualSummaryMapper">
+
+    <select id="queryAnnualSummaryList" parameterType="String" resultType="com.cloudfly.start.bill.entity.BillBookInfo">
+        select info_id infoId,
+               book_id bookId
+        from bill_book_info bbi
+        where bbi.book_Id=#{bookId}
+    </select>
+</mapper>
