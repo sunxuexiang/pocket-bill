@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloudfly.start.bill.mapper.BillShareMapper">
 
-    <resultMap id="billAndUserDao" type="com.cloudfly.start.bill.dao.BillAndUserDao">
-        <collection property="billUsers" ofType="com.cloudfly.start.bill.dao.BillShareDao" javaType="java.util.List">
+    <resultMap id="billAndUserDao" type="com.cloudfly.start.bill.entity.BillAndUser">
+        <collection property="billUsers" ofType="com.cloudfly.start.bill.entity.BillShareBase" javaType="java.util.List">
             <result column="user_id"  property="userId"/>
             <result column="user_name"  property="userName"/>
             <result column="user_img"  property="userImg"/>
