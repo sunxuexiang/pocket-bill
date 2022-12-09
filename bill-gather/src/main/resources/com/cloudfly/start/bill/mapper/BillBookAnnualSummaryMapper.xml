@@ -4,10 +4,41 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 <mapper namespace="com.cloudfly.start.bill.mapper.BillBookAnnualSummaryMapper">
 
-    <select id="queryAnnualSummaryList" parameterType="String" resultType="com.cloudfly.start.bill.entity.BillBookInfo">
-        select info_id infoId,
-               book_id bookId
-        from bill_book_info bbi
-        where bbi.book_Id=#{bookId}
+    <select id="queryAnnualSummaryList" parameterType="int" resultType="java.util.Map">
+        select tt.bookId bookId,
+               tt.billMonth billMonth,
+               max(tt.monthIn) monthIn,
+               max(tt.monthOut) monthOut,
+               max(tt.monthIn)-max(tt.monthOut) balance
+        from (
+            select t.book_id bookId,
+                   t.bill_month billMonth,
+                   t.info_pay_type infoPayType,
+                   (case when t.info_pay_type=1 then sum(t.info_money) else null end) monthIn
+                   (case when t.info_pay_type=2 then sum(t.info_money) else null end) monthOut
+            from (
+                select bbi.book_id
+                       bbi.info_money
+                       bbi.info_pay_type ,
+                       (case when bbi.info_date=1 then 1
+                             when bbi.info_date=2 then 2
+                             when bbi.info_date=3 then 3
+                             when bbi.info_date=4 then 4
+                             when bbi.info_date=5 then 5
+                             when bbi.info_date=6 then 6
+                             when bbi.info_date=7 then 7
+                             when bbi.info_date=8 then 8
+                             when bbi.info_date=9 then 9
+                             when bbi.info_date=10 then 10
+                             when bbi.info_date=11 then 11
+                             when bbi.info_date=12 then 12
+                        else null end
+                       ) bill_month
+                from bill_book_info bbi
+                where bbi.book_Id=#{bookId}
+            ) t
+            group by t.bookId,t.bill_month,t.info_pay_type
+        ) tt
+        group by tt.bookId, tt.billMonth
     </select>
 </mapper>

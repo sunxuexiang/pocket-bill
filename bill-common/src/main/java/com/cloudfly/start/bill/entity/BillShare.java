@@ -101,4 +101,6 @@ public class BillShare {
     public void setBookType(String bookType) {
         this.bookType = bookType;
     }
+
+
 }

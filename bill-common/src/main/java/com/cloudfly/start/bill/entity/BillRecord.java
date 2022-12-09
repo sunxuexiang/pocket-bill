@@ -73,4 +73,17 @@ public class BillRecord {
     public void setUpdateBy(int updateBy) {
         this.updateBy = updateBy;
     }
+
+    @Override
+    public String toString() {
+        return "BillRecord{" +
+                "recordId=" + recordId +
+                ", recordUserId=" + recordUserId +
+                ", recordDate=" + recordDate +
+                ", createDate=" + createDate +
+                ", createBy=" + createBy +
+                ", updateDate=" + updateDate +
+                ", updateBy=" + updateBy +
+                '}';
+    }
 }

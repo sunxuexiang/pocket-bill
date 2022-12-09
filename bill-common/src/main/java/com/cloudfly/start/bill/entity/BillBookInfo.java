@@ -13,15 +13,13 @@ public class BillBookInfo implements Serializable {
 
     @TableId
     private Integer infoId;
-
     private String userId;
-
     private String bookId;
-    private String infoPayId;
-    private String infoTypeId;
+    private String payId;
+    private String typeId;
     private Double infoMoney;
     private String infoImg;
-    private int infoReType;
+    private int infoRapType;
     private Date infoDate;
     private String infoRemark;
     private Date createDate;
@@ -45,28 +43,36 @@ public class BillBookInfo implements Serializable {
         this.userId = userId;
     }
 
+    public String getPayId() {
+        return payId;
+    }
+
+    public void setPayId(String payId) {
+        this.payId = payId;
+    }
+
+    public String getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(String typeId) {
+        this.typeId = typeId;
+    }
+
+    public int getInfoRapType() {
+        return infoRapType;
+    }
+
+    public void setInfoRapType(int infoRapType) {
+        this.infoRapType = infoRapType;
+    }
+
     public String getBookId() {
         return bookId;
     }
 
     public void setBookId(String bookId) {
         this.bookId = bookId;
-    }
-
-    public String getInfoPayId() {
-        return infoPayId;
-    }
-
-    public void setInfoPayId(String infoPayId) {
-        this.infoPayId = infoPayId;
-    }
-
-    public String getInfoTypeId() {
-        return infoTypeId;
-    }
-
-    public void setInfoTypeId(String infoTypeId) {
-        this.infoTypeId = infoTypeId;
     }
 
     public Double getInfoMoney() {
@@ -83,14 +89,6 @@ public class BillBookInfo implements Serializable {
 
     public void setInfoImg(String infoImg) {
         this.infoImg = infoImg;
-    }
-
-    public int getInfoReType() {
-        return infoReType;
-    }
-
-    public void setInfoReType(int infoReType) {
-        this.infoReType = infoReType;
     }
 
     public Date getInfoDate() {
@@ -139,5 +137,25 @@ public class BillBookInfo implements Serializable {
 
     public void setUpdateBy(Integer updateBy) {
         this.updateBy = updateBy;
+    }
+
+    @Override
+    public String toString() {
+        return "BillBookInfo{" +
+                "infoId=" + infoId +
+                ", userId='" + userId + '\'' +
+                ", bookId='" + bookId + '\'' +
+                ", payId='" + payId + '\'' +
+                ", typeId='" + typeId + '\'' +
+                ", infoMoney=" + infoMoney +
+                ", infoImg='" + infoImg + '\'' +
+                ", infoRapType=" + infoRapType +
+                ", infoDate=" + infoDate +
+                ", infoRemark='" + infoRemark + '\'' +
+                ", createDate=" + createDate +
+                ", createBy=" + createBy +
+                ", updateDate=" + updateDate +
+                ", updateBy=" + updateBy +
+                '}';
     }
 }

@@ -73,4 +73,17 @@ public class BillIntegral {
     public void setUpdateBy(int updateBy) {
         this.updateBy = updateBy;
     }
+
+    @Override
+    public String toString() {
+        return "BillIntegral{" +
+                "integralId=" + integralId +
+                ", integralUserId=" + integralUserId +
+                ", integralInfo='" + integralInfo + '\'' +
+                ", createDate=" + createDate +
+                ", createBy=" + createBy +
+                ", updateDate=" + updateDate +
+                ", updateBy=" + updateBy +
+                '}';
+    }
 }

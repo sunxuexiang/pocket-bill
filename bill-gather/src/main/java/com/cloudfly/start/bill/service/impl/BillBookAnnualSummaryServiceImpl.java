@@ -6,6 +6,9 @@ import com.cloudfly.start.bill.service.BillBookAnnualSummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+
 @Service
 public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummaryService {
 
@@ -16,7 +19,7 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
      * @param bookId
      */
     @Override
-    public BillBookInfo queryAnnualSummaryList(String bookId) {
+    public List<Map<String,String>> queryAnnualSummaryList(String bookId) {
         return billBookAnnualSummaryMapper.queryAnnualSummaryList(bookId);
     }
 }

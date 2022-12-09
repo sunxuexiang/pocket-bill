@@ -83,4 +83,18 @@ public class BillType {
     public void setUpdateBy(int updateBy) {
         this.updateBy = updateBy;
     }
+
+    @Override
+    public String toString() {
+        return "BillType{" +
+                "type_id=" + type_id +
+                ", typeIcon='" + typeIcon + '\'' +
+                ", typeName='" + typeName + '\'' +
+                ", type='" + type + '\'' +
+                ", createDate=" + createDate +
+                ", createBy=" + createBy +
+                ", updateDate=" + updateDate +
+                ", updateBy=" + updateBy +
+                '}';
+    }
 }

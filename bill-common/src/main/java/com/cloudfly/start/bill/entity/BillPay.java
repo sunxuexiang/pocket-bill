@@ -62,4 +62,16 @@ public class BillPay {
     public void setUpdateBy(int updateBy) {
         this.updateBy = updateBy;
     }
+
+    @Override
+    public String toString() {
+        return "BillPay{" +
+                "payId=" + payId +
+                ", payType='" + payType + '\'' +
+                ", createDate=" + createDate +
+                ", createBy=" + createBy +
+                ", updateDate=" + updateDate +
+                ", updateBy=" + updateBy +
+                '}';
+    }
 }
