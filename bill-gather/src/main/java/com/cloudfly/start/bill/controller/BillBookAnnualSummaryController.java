@@ -22,13 +22,13 @@ public class BillBookAnnualSummaryController {
     @Autowired
     BillBookAnnualSummaryService billBookAnnualSummaryService;
 
-    @RequestMapping("/queryAnnualSummaryList")
-    public R queryAnnualSummaryList(@RequestParam("bookId") String bookId){
-        logger.info("queryAnnualSummaryList start with bookId={}",bookId);
+    @RequestMapping("/queryAnnualSummaryReportList")
+    public R queryAnnualSummaryReportList(@RequestParam("bookId") String bookId){
+        logger.info("queryAnnualSummaryReportList start with bookId={}",bookId);
         try {
-            return R.ok().put("result",billBookAnnualSummaryService.queryAnnualSummaryList(bookId));
+            return R.ok().put("result",billBookAnnualSummaryService.queryAnnualSummaryReportList(bookId));
         }catch (Exception e){
-            logger.error("queryAnnualSummaryList occured exception : {}",ExceptionUtils.getStackTrace(e));
+            logger.error("queryAnnualSummaryReportList occured exception : {}",ExceptionUtils.getStackTrace(e));
             throw new BillSystemException(e.getMessage());
         }
     }

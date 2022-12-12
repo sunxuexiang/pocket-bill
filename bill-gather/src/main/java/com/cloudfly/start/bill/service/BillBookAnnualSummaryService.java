@@ -7,6 +7,6 @@ import java.util.Map;
 
 public interface BillBookAnnualSummaryService {
 
-    List<Map<String,String>> queryAnnualSummaryList(String bookId);
+    List<Map<String,String>> queryAnnualSummaryReportList(String bookId);
 
 }

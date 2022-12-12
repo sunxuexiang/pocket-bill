@@ -11,5 +11,5 @@ import java.util.Map;
 
 public interface BillBookAnnualSummaryMapper {
 
-    List<Map<String,String>> queryAnnualSummaryList(@Param("bookId") String bookId);
+    List<Map<String,String>> queryAnnualSummaryReportList(@Param("bookId") String bookId);
 }

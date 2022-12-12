@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
 
 @Service
 public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummaryService {
@@ -19,7 +20,7 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
      * @param bookId
      */
     @Override
-    public List<Map<String,String>> queryAnnualSummaryList(String bookId) {
-        return billBookAnnualSummaryMapper.queryAnnualSummaryList(bookId);
+    public List<Map<String,String>> queryAnnualSummaryReportList(String bookId) {
+        return billBookAnnualSummaryMapper.queryAnnualSummaryReportList(bookId);
     }
 }
