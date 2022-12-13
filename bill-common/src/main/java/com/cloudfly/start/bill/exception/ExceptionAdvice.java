@@ -1,8 +1,6 @@
-package com.cloudfly.start.bill.utils;
+package com.cloudfly.start.bill.exception;
 
-import com.cloudfly.start.bill.exception.BillBusinessException;
-import com.cloudfly.start.bill.exception.BillSystemException;
-import org.apache.http.HttpStatus;
+import com.cloudfly.start.bill.utils.R;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -28,20 +26,19 @@ public class ExceptionAdvice {
     @ResponseBody
     @ExceptionHandler(BillSystemException.class)
     public R handleException(Exception e) {
-        R result = R.error("系统异常信息："+e.getMessage());
-        return result;
+        return R.error("系统执行异常："+e.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
     @ResponseBody
     public R handleException(RuntimeException e) {
-        return R.error("运行异常："+e.getMessage());
+        return R.error("系统运行异常："+e.getMessage());
     }
 
     @ExceptionHandler(BillBusinessException.class)
     @ResponseBody
     public R doBusinessException(Exception e) {
-        return R.error("业务异常："+e.getMessage());
+        return R.error("系统业务异常："+e.getMessage());
     }
 }
 

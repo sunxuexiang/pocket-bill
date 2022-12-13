@@ -8,6 +8,8 @@ package com.cloudfly.start.bill.contants;
  * @Description: 公共常量类
  */
 public class CommonContant {
+
+    public static final String RESPONSE_FIELD="result";
 }
 
 

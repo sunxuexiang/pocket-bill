@@ -4,8 +4,7 @@ package com.cloudfly.start.bill.controller;
 import com.cloudfly.start.bill.exception.BillSystemException;
 import com.cloudfly.start.bill.service.BillBookAnnualSummaryService;
 import com.cloudfly.start.bill.utils.R;
-import org.apache.commons.lang.exception.ExceptionUtils;
-import org.apache.http.HttpStatus;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +27,7 @@ public class BillBookAnnualSummaryController {
         try {
             return R.ok().put("result",billBookAnnualSummaryService.queryAnnualSummaryReportList(bookId));
         }catch (Exception e){
-            logger.error("queryAnnualSummaryReportList occured exception : {}",ExceptionUtils.getStackTrace(e));
+            logger.error("queryAnnualSummaryReportList occured exception : {}", ExceptionUtils.getStackTrace(e));
             throw new BillSystemException(e.getMessage());
         }
     }
