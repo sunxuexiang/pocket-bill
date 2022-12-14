@@ -9,9 +9,9 @@
                bbi.info_money infoMoney,
                bbi.info_pay_type infoPayType
         from bill_book_info bbi inner join bill_user bu
-             on(bbi.user_id=bu.user_id)
-        where bbi.book_id=#{bookId}
-        and bbi.info_pay_type=#{infoPayType}
+             on(bbi.user_id = bu.user_id)
+        where bbi.book_id = #{bookId,jdbcType=INTEGER}
+        and bbi.info_pay_type = #{infoPayType,jdbcType=INTEGER}
         and bbi.info_create <![CDATA[ >= ]]> #{startTime}
         and bbi.info_create <![CDATA[ <= ]]> #{endTime}
     </select>

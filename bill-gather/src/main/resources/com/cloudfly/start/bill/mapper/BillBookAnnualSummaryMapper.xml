@@ -35,7 +35,7 @@
                         else null end
                        ) bill_month
                 from bill_book_info bbi
-                where bbi.book_Id=#{bookId}
+                where bbi.book_Id=#{bookId,jdbcType=INTEGER}
             ) t
             group by t.bookId,t.bill_month,t.info_pay_type
         ) tt

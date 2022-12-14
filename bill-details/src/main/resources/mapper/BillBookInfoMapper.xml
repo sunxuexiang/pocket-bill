@@ -24,13 +24,13 @@
         from bill_book_Info bbi
         where bbi.book_id=#{bookId};
         <if test="#{userId} != null">
-            and bbi.user_id=#{userId}
+            and bbi.user_id=#{userId,jdbcType=INTEGER}
         </if>
         <if test="#{infoDate} != null">
             and bbi.info_date=#{infoDate}
         </if>
         <if test="#{infoMonty} != null">
-            and bbi.info_money=#{infoMonty}
+            and bbi.info_money=#{infoMonty,jdbcType=NUMERIC}
         </if>
     </select>
 </mapper>
