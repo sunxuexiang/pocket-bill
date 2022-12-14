@@ -24,7 +24,7 @@ import java.util.List;
  */
 @RequestMapping("/billBookInfoController")
 @RestController
-public class BillBookInfoController extends Object{
+public class BillBookInfoController{
 
     private static Logger logger= LoggerFactory.getLogger(BillBookInfoController.class);
 
