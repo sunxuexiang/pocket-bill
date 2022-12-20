@@ -5,8 +5,14 @@
 <mapper namespace="com.cloudfly.start.bill.mapper.BillBookReportGatherMapper">
 
     <select id="generateReport" resultType="com.cloudfly.start.bill.entity.BillBookInfo">
-        select * from bill_book_info bbi
-        where bbi.create_date <![CDATA[ >= ]]> #{startTime}
-          and bbi.create_date <![CDATA[ <= ]]> #{endTime}
+        select bbi.book_id bookId,
+               bbi.info_money infoMoney,
+               bbi.info_pay_type infoPayType
+        from bill_book_info bbi inner join bill_user bu
+             on(bbi.user_id = bu.user_id)
+        where bbi.book_id = #{bookId,jdbcType=INTEGER}
+        and bbi.info_pay_type = #{infoPayType,jdbcType=INTEGER}
+        and bbi.info_create <![CDATA[ >= ]]> #{startTime}
+        and bbi.info_create <![CDATA[ <= ]]> #{endTime}
     </select>
 </mapper>

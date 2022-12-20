@@ -2,8 +2,11 @@ package com.cloudfly.start.bill.service;
 
 import com.cloudfly.start.bill.entity.BillBookInfo;
 
+import java.util.List;
+import java.util.Map;
+
 public interface BillBookAnnualSummaryService {
 
-    BillBookInfo queryAnnualSummaryList(String bookId);
+    List<Map<String,String>> queryAnnualSummaryReportList(String bookId);
 
 }

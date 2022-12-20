@@ -85,4 +85,18 @@ public class BillBook implements Serializable {
     public void setBookRemark(String bookRemark) {
         this.bookRemark = bookRemark;
     }
+
+    @Override
+    public String toString() {
+        return "BillBook{" +
+                "bookId=" + bookId +
+                ", userId=" + userId +
+                ", bookName='" + bookName + '\'' +
+                ", bookRemark='" + bookRemark + '\'' +
+                ", createDate=" + createDate +
+                ", createBy=" + createBy +
+                ", updateDate=" + updateDate +
+                ", updateBy=" + updateBy +
+                '}';
+    }
 }

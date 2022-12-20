@@ -75,4 +75,17 @@ public class BillRout {
     public void setUpdateBy(Integer updateBy) {
         this.updateBy = updateBy;
     }
+
+    @Override
+    public String toString() {
+        return "BillRout{" +
+                "routId=" + routId +
+                ", routType=" + routType +
+                ", routValue=" + routValue +
+                ", createDate=" + createDate +
+                ", createBy=" + createBy +
+                ", updateDate=" + updateDate +
+                ", updateBy=" + updateBy +
+                '}';
+    }
 }

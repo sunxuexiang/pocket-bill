@@ -3,7 +3,15 @@ server:
 wechat:
   url: https://api.weixin.qq.com/sns/jscode2session?appid=wx9bd73e9dcf008f08&secret=a16d33d9d0710e7e7420218ec9bb773f&js_code=JSCODE&grant_type=authorization_code
 
+
 logging:
   file:
     path: D:\\logs
     name: bill-user.log
+spring:
+  application:
+    name: bill-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848

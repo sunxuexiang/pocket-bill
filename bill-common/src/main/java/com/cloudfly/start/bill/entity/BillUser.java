@@ -111,4 +111,21 @@ public class BillUser {
     public void setUserOpenid(String userOpenid) {
         this.userOpenid = userOpenid;
     }
+
+    @Override
+    public String toString() {
+        return "BillUser{" +
+                "userId=" + userId +
+                ", userOpenid='" + userOpenid + '\'' +
+                ", userName='" + userName + '\'' +
+                ", userImg='" + userImg + '\'' +
+                ", userSex='" + userSex + '\'' +
+                ", userIntegral=" + userIntegral +
+                ", userInvitation=" + userInvitation +
+                ", createDate=" + createDate +
+                ", createBy=" + createBy +
+                ", updateDate=" + updateDate +
+                ", updateBy=" + updateBy +
+                '}';
+    }
 }
