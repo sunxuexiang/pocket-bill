@@ -50,7 +50,7 @@ public class BillRecordServiceImpl extends ServiceImpl<BillRecordMapper,BillReco
 
     @Override
     public R querRecordByUserId() {
-        BillRecord billRecord = baseMapper.selectOne(new LambdaQueryWrapper<BillRecord>().eq(BillRecord::getRecordUserId, JwtUtils.getCurrentLoginUser()).eq(BillRecord::getCreateDate, new Date()));
-        return R.ok(billRecord);
+        int count =  baseMapper.selectCount(new LambdaQueryWrapper<BillRecord>().eq(BillRecord::getRecordUserId, JwtUtils.getCurrentLoginUser()));
+        return R.ok(count);
     }
 }

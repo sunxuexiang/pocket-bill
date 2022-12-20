@@ -10,4 +10,6 @@ public interface BillUserService extends IService<BillUser>{
 
      R addUser(BillUser billUser);
 
+     R queryUserInfo();
+
 }

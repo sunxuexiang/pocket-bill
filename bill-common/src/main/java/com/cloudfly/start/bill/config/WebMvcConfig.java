@@ -31,7 +31,7 @@ public class WebMvcConfig implements WebMvcConfigurer{
     {
         registry.addInterceptor(jwtInterceptor())
                 .addPathPatterns("/**")
-                .excludePathPatterns("/user/login", "/user/addUser");
+                .excludePathPatterns("/bill-user/login", "/bill-user/addUser");
     }
 
     @Bean
