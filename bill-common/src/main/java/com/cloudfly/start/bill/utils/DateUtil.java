@@ -186,8 +186,7 @@ public class DateUtil {
     }
     //字符串转换成日期时间，不精确到时分秒
     public static Date getStringToDate(String day){
-        //用给定的模式和默认语言环境的日期格式符号构造 SimpleDateFormat。
-        SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//HH是24小时制，hh是12小时制
+        //用给定的模式和默认语言环境的日期格式符号构造 SimpleDateFormat
         SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");
         Date dt = new Date();
         try{
@@ -208,12 +207,10 @@ public class DateUtil {
     public static Date getStringToDateTime(String day){
         //用给定的模式和默认语言环境的日期格式符号构造 SimpleDateFormat。
         SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//HH是24小时制，hh是12小时制
-        SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");
         Date dt = new Date();
-        DateFormat df2 = DateFormat.getDateTimeInstance();//可以精确到时分秒
         try{
 
-            dt=sdf2.parse(day);
+            dt=sdf1.parse(day);
         }
         catch(Exception e){
             e.printStackTrace();

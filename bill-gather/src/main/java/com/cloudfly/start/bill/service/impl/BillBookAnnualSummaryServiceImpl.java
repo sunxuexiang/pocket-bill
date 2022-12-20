@@ -6,6 +6,7 @@ import com.cloudfly.start.bill.service.BillBookAnnualSummaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
@@ -20,7 +21,7 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
      * @param bookId
      */
     @Override
-    public List<Map<String,String>> queryAnnualSummaryReportList(String bookId) {
-        return billBookAnnualSummaryMapper.queryAnnualSummaryReportList(bookId);
+    public List<Map<String,String>> queryAnnualSummaryReportList(String bookId, Date startTime, Date endTime) {
+        return billBookAnnualSummaryMapper.queryAnnualSummaryReportList(bookId,startTime, endTime);
     }
 }
