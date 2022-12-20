@@ -27,6 +27,11 @@ public class LoginController {
         return billUserService.addUser(billUser);
     }
 
+    @RequestMapping("/queryUser")
+    public R queryUser(){
+        return billUserService.queryUserInfo();
+    }
+
     @RequestMapping("/send")
     public R send() {
         System.out.println("sss");

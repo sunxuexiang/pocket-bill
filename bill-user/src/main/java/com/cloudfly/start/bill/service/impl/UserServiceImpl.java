@@ -56,6 +56,13 @@ public class UserServiceImpl extends ServiceImpl<BillUserMapper,BillUser> implem
         return R.error("修改失败");
     }
 
+    @Override
+    public R queryUserInfo() {
+        Integer currentLoginUser = JwtUtils.getCurrentLoginUser();
+        BillUser billUser = billUserMapper.selectById(currentLoginUser);
+        return R.ok(billUser);
+    }
+
     private Integer saveOrGetUserId(BillUser billUser, String openId){
         try {
             if (null == billUser) {
