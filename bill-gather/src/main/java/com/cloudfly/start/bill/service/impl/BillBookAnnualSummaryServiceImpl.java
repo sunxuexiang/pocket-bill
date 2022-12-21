@@ -28,12 +28,12 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
 
         Date startTime= DateUtil.getYearFirst(year);
         Date endTime= DateUtil.getYearLast(year);
-        List<Map<String,Integer>> resultMap=billBookAnnualSummaryMapper.queryAnnualSummaryReportList(bookId,startTime,endTime);
+        List<Map<String,BigDecimal>> resultMap=billBookAnnualSummaryMapper.queryAnnualSummaryReportList(bookId,startTime,endTime);
         BigDecimal yearTotalIn=new BigDecimal(0);
         BigDecimal yearTotalOut=new BigDecimal(0);
-        for(Map<String,Integer> map:resultMap){
-            yearTotalIn=yearTotalIn.add(new BigDecimal(map.get("monthIn").toString()));
-            yearTotalOut=yearTotalOut.add(new BigDecimal(Integer.parseInt(map.get("monthOut").toString())));
+        for(Map<String,BigDecimal> map:resultMap){
+            yearTotalIn=yearTotalIn.add(map.get("monthIn"));
+            yearTotalOut=yearTotalOut.add(map.get("monthOut"));
         }
         Map<String,Object> result=new HashMap<>();
         result.put("yearTotalIn",yearTotalIn);
