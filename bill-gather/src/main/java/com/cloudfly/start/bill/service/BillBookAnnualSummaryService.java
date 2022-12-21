@@ -8,6 +8,6 @@ import java.util.Map;
 
 public interface BillBookAnnualSummaryService {
 
-    Map<String,Object> queryAnnualSummaryReportList(String bookId,int year);
+    Map<String,Object> queryAnnualSummaryReportList(int bookId,int year);
 
 }

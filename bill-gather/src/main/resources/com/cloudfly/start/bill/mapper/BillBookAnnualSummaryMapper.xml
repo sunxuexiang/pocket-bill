@@ -14,11 +14,11 @@
             select t.book_id bookId,
                    t.bill_month billMonth,
                    t.info_pay_type infoPayType,
-                   (case when t.info_pay_type=1 then sum(t.info_money) else null end) monthIn
+                   (case when t.info_pay_type=1 then sum(t.info_money) else null end) monthIn,
                    (case when t.info_pay_type=2 then sum(t.info_money) else null end) monthOut
             from (
-                select bbi.book_id
-                       bbi.info_money
+                select bbi.book_id,
+                       bbi.info_money,
                        bbi.info_pay_type ,
                        (case when month(bbi.info_date)=1 then 1
                              when month(bbi.info_date)=2 then 2
@@ -36,10 +36,10 @@
                        ) bill_month
                 from bill_book_info bbi
                 where bbi.book_Id=#{bookId,jdbcType=INTEGER}
-                      and bbi.info_date <![CDATA[ >= ]]> #{startTime,jdbcType=DATE}
-                      and bbi.info_date <![CDATA[ <= ]]> #{endTime,jdbcType=DATE}
+                      and bbi.info_date <![CDATA[ >= ]]> #{startTime,javaType=DATE}
+                      and bbi.info_date <![CDATA[ <= ]]> #{endTime,javaType=DATE}
             ) t
-            group by t.bookId,t.bill_month,t.info_pay_type
+            group by t.book_Id,t.bill_month,t.info_pay_type
         ) tt
         group by tt.bookId, tt.billMonth
     </select>

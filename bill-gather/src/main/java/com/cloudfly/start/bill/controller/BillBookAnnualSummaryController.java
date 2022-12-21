@@ -34,7 +34,7 @@ public class BillBookAnnualSummaryController {
      * @author : ligntning
      * */
     @RequestMapping("/queryAnnualSummaryReportList")
-    public R queryAnnualSummaryReportList(@RequestParam("bookId") String bookId,@RequestParam("year") int year){
+    public R queryAnnualSummaryReportList(@RequestParam("bookId") int bookId,@RequestParam("year") int year){
         logger.info("queryAnnualSummaryReportList start with bookId={},year={}",bookId,year);
         try {
 
