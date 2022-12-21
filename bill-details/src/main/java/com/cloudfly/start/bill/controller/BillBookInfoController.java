@@ -1,5 +1,6 @@
 package com.cloudfly.start.bill.controller;
 
+import com.cloudfly.start.bill.contants.CommonContant;
 import com.cloudfly.start.bill.entity.BillBookInfo;
 import com.cloudfly.start.bill.exception.BillSystemException;
 import com.cloudfly.start.bill.service.BillBookInfoService;
@@ -50,17 +51,7 @@ public class BillBookInfoController{
     public R queryBillDetailsCustomize(@RequestBody BillBookInfo billBookInfo){
         logger.info("queryBillDetailsCustomize start with data : [{}]",billBookInfo.toString());
         try{
-            List<BillBookInfo> billBookInfos = billBookInfoService.queryBillDetailsCustomize(billBookInfo);
-            long totalIn=0;
-            long totalOut=0;
-            for(BillBookInfo bbi:billBookInfos){
-                if(bbi.getInfoRapType()==1){
-                    totalIn+=bbi.getInfoMoney();
-                }else{
-                    totalOut+=bbi.getInfoMoney();
-                }
-            }
-            return R.ok().put("result",billBookInfos).put("totalIn",totalIn).put("totalOut",totalOut);
+            return R.ok().put(CommonContant.RESPONSE_FIELD,billBookInfoService.queryBillDetailsCustomize(billBookInfo));
         }catch (Exception e){
             logger.error("queryBillDetailsCustomize occured exception : {}", ExceptionUtils.getStackTrace(e));
             throw new BillSystemException(e.getMessage());
