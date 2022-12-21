@@ -47,6 +47,9 @@ public class BillBookInfoController{
         billBookInfoService.removeBookInfoById(bookInfoId);
     }
 
+    /**
+     * 用户自定义查询账单
+     * */
     @RequestMapping("/queryBillDetailsCustomize")
     public R queryBillDetailsCustomize(@RequestBody BillBookInfo billBookInfo){
         logger.info("queryBillDetailsCustomize start with data : [{}]",billBookInfo.toString());

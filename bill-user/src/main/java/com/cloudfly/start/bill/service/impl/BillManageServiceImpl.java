@@ -6,12 +6,15 @@ import com.cloudfly.start.bill.mapper.BillBookMapper;
 import com.cloudfly.start.bill.service.BillManageService;
 import com.cloudfly.start.bill.utils.JwtUtils;
 import com.cloudfly.start.bill.utils.R;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service("billManageService")
 public class BillManageServiceImpl extends ServiceImpl<BillBookMapper,BillBook> implements BillManageService{
 
 
+    @Autowired
+    private BillBookMapper billBookMapper;
     @Override
     public R addBillManage(BillBook billBook) {
         Integer currentLoginUser = JwtUtils.getCurrentLoginUser();
@@ -40,4 +43,14 @@ public class BillManageServiceImpl extends ServiceImpl<BillBookMapper,BillBook> 
     public R queryByUserIdList() {
         return R.ok(baseMapper.queryBillByUserId(JwtUtils.getCurrentLoginUser()));
     }
+
+    /**
+     * @param userId
+     * @return
+     */
+    @Override
+    public BillBook queryDefaultBillByUserId(Integer userId) {
+        return billBookMapper.queryDefaultBillByUserId(userId);
+    }
+
 }

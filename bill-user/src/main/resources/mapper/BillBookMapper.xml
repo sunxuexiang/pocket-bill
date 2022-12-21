@@ -10,4 +10,12 @@
         where user.user_id = ${userId}
     </select>
 
+    <select id="queryDefaultBillByUserId" parameterType="java.lang.Integer" resultType="com.cloudfly.start.bill.entity.BillBook">
+        select bb.user_id userId,
+               bb.book_id bookId,
+               bb.book_name bookName
+        from bill_book bb
+        where bb.userId=#{userId,jdbcType=INTEGER}
+        and bb.is_default=1
+    </select>
 </mapper>

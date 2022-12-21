@@ -10,6 +10,8 @@ package com.cloudfly.start.bill.contants;
 public class CommonContant {
 
     public static final String RESPONSE_FIELD="result";
+
+    public static final String DATA_FIELD="data";
 }
 
 

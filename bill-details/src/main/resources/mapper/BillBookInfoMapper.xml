@@ -26,11 +26,11 @@
         <if test="#{userId} != null">
             and bbi.user_id=#{userId,jdbcType=INTEGER}
         </if>
-        <if test="#{infoDate} != null">
-            and bbi.info_date=#{infoDate}
-        </if>
         <if test="#{infoMoney} != null">
             and bbi.info_money=#{infoMoney,jdbcType=NUMERIC}
+        </if>
+        <if test="#{infoDate} != null">
+            and bbi.info_date=#{infoDate}
         </if>
     </select>
 </mapper>

@@ -63,7 +63,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
         Map<String,Object> result=new HashMap<>();
         result.put("totalIn",totalIn);
         result.put("totalOut",totalOut);
-        result.put("data",billBookInfos);
+        result.put(CommonContant.DATA_FIELD,billBookInfos);
         return result;
     }
 }

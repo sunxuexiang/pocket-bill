@@ -9,6 +9,7 @@
 package com.cloudfly.start.bill.utils;
 
 
+import com.cloudfly.start.bill.contants.CommonContant;
 import org.apache.http.HttpStatus;
 
 import java.util.HashMap;
@@ -62,7 +63,7 @@ public class R extends HashMap<String, Object> {
 
 	public static R ok(Object o) {
 		R r = new R(HttpStatus.SC_OK);
-		r.put("msg",o);
+		r.put(CommonContant.RESPONSE_FIELD,o);
 		return r;
 	}
 	

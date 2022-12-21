@@ -1,5 +1,6 @@
 package com.cloudfly.start.bill.service.impl;
 
+import com.cloudfly.start.bill.contants.CommonContant;
 import com.cloudfly.start.bill.entity.BillBookInfo;
 import com.cloudfly.start.bill.mapper.BillBookAnnualSummaryMapper;
 import com.cloudfly.start.bill.service.BillBookAnnualSummaryService;
@@ -31,7 +32,8 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
         BigDecimal yearTotalOut=new BigDecimal(0);
         int[] array=new int [13];
         for(Map<String,BigDecimal> map:resultList){
-            yearTotalIn=yearTotalIn.add(map.get("monthIn").setScale(2, RoundingMode.HALF_UP));
+            BigDecimal monthIn=map.get("monthIn").setScale(2, RoundingMode.HALF_UP);
+            yearTotalIn=yearTotalIn.add(monthIn);
             yearTotalOut=yearTotalOut.add(map.get("monthOut").setScale(2, RoundingMode.HALF_UP));
             String billMonth=String.valueOf(map.get("billMonth"));
             array[Integer.parseInt(billMonth)]=1;
@@ -60,8 +62,7 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
             }
         });
 
-
-        result.put("data",resultList);
+        result.put(CommonContant.DATA_FIELD,resultList);
 
         return result;
     }
