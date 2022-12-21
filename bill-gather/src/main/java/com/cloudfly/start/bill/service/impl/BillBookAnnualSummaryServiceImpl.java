@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.math.RoundingMode;
+import java.util.*;
 import java.util.concurrent.locks.ReentrantLock;
 
 @Service
@@ -28,18 +26,43 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
 
         Date startTime= DateUtil.getYearFirst(year);
         Date endTime= DateUtil.getYearLast(year);
-        List<Map<String,BigDecimal>> resultMap=billBookAnnualSummaryMapper.queryAnnualSummaryReportList(bookId,startTime,endTime);
+        List<Map<String,BigDecimal>> resultList=billBookAnnualSummaryMapper.queryAnnualSummaryReportList(bookId,startTime,endTime);
         BigDecimal yearTotalIn=new BigDecimal(0);
         BigDecimal yearTotalOut=new BigDecimal(0);
-        for(Map<String,BigDecimal> map:resultMap){
-            yearTotalIn=yearTotalIn.add(map.get("monthIn"));
-            yearTotalOut=yearTotalOut.add(map.get("monthOut"));
+        int[] array=new int [13];
+        for(Map<String,BigDecimal> map:resultList){
+            yearTotalIn=yearTotalIn.add(map.get("monthIn").setScale(2, RoundingMode.HALF_UP));
+            yearTotalOut=yearTotalOut.add(map.get("monthOut").setScale(2, RoundingMode.HALF_UP));
+            String billMonth=String.valueOf(map.get("billMonth"));
+            array[Integer.parseInt(billMonth)]=1;
+        }
+        for(int i=1;i<array.length;i++){
+            if(array[i]==0){
+                Map<String,BigDecimal> generateMap=new HashMap<>();
+                generateMap.put("bookId",new BigDecimal(bookId+""));
+                generateMap.put("billMonth",new BigDecimal(i+""));
+                generateMap.put("monthIn",new BigDecimal(0).setScale(2, RoundingMode.HALF_UP));
+                generateMap.put("monthOut",new BigDecimal(0).setScale(2, RoundingMode.HALF_UP));
+                generateMap.put("balance",new BigDecimal(0).setScale(2, RoundingMode.HALF_UP));
+                resultList.add(generateMap);
+            }
         }
         Map<String,Object> result=new HashMap<>();
-        result.put("yearTotalIn",yearTotalIn);
-        result.put("yearTotalOut",yearTotalOut);
-        result.put("yearTotalBalance",yearTotalIn.subtract(yearTotalOut));
-        result.put("data",resultMap);
+        result.put("yearTotalIn",yearTotalIn.setScale(2, RoundingMode.HALF_UP));
+        result.put("yearTotalOut",yearTotalOut.setScale(2, RoundingMode.HALF_UP));
+        result.put("yearTotalBalance",yearTotalIn.subtract(yearTotalOut).setScale(2, RoundingMode.HALF_UP));
+
+        Collections.sort(resultList, new Comparator<Map<String,BigDecimal>>() {
+            @Override
+            public int compare(Map<String, BigDecimal> o1, Map<String, BigDecimal> o2) {
+                return Integer.parseInt(String.valueOf(o2.get("billMonth")))
+                        -Integer.parseInt(String.valueOf(o1.get("billMonth")));
+            }
+        });
+
+
+        result.put("data",resultList);
+
         return result;
     }
 }
