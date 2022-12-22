@@ -17,7 +17,10 @@ public class BillBook implements Serializable {
     private int userId;
     private String bookName;
     private String bookRemark;
+
+    private String bookType;
     private Date createDate;
+
     private int createBy;
     private Date updateDate;
     private int updateBy;
@@ -44,6 +47,14 @@ public class BillBook implements Serializable {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
+    }
+
+    public String getBookType() {
+        return this.bookType;
+    }
+
+    public void setBookType(String bookType) {
+        this.bookType = bookType;
     }
 
     public Date getCreateDate() {

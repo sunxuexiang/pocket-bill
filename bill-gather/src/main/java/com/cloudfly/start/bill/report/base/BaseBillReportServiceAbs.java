@@ -16,27 +16,49 @@ public abstract class BaseBillReportServiceAbs implements BaseBillReportService 
 
     private String infoPayType;
 
+    private int year;
+
+    private int month;
+
     public String getInfoPayType() {
         return infoPayType;
     }
 
-    public void setReportBaseData(String reportType) {
-        this.infoPayType=infoPayType;
+    public int getYear() {
+        return year;
     }
 
-    public List<BillBookInfo> generateReport(String infoPayType){
-        this.setReportBaseData(infoPayType);
-        Date startTime=countQueryStartDate();
-        Date endTime=countQueryEndDate();
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+    }
+
+    public void setReportBaseData(String reportType,int year,int month) {
+        this.infoPayType=infoPayType;
+        this.year=year;
+        this.month=month;
+    }
+
+    public List<BillBookInfo> generateReport(String infoPayType,int year,int month){
+        this.setReportBaseData(infoPayType,year,month);
+        Date startTime=countQueryStartTime();
+        Date endTime=countQueryEndTime();
         return billReportMapper.generateReport(startTime,endTime,infoPayType);
     }
     /**
      * 计算当前报表查询开始时间
      * */
-    public abstract Date countQueryStartDate();
+    public abstract Date countQueryStartTime();
     /**
      * 计算当前报表查询结束时间
      * */
-    public abstract Date countQueryEndDate();
+    public abstract Date countQueryEndTime();
 
 }

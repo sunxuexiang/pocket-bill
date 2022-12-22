@@ -5,6 +5,8 @@ import com.cloudfly.start.bill.entity.BillBook;
 import com.cloudfly.start.bill.entity.BillBookInfo;
 import com.cloudfly.start.bill.utils.R;
 
+import java.util.List;
+
 public interface BillManageService extends IService<BillBook>{
 
     R addBillManage(BillBook billBook);
@@ -13,7 +15,10 @@ public interface BillManageService extends IService<BillBook>{
 
     R queryByBillId(Integer userId);
 
-    R queryByUserIdList();
+    List<BillBook> queryBillByUserId();
 
-    BillBook queryDefaultBillByUserId(Integer userId);
+    BillBook queryDefaultBillByUserId();
+
+    void updateDefaultBill(Integer bookId);
+
 }

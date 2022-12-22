@@ -2,12 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.cloudfly.start.bill.mapper.BillBookMapper">
 
-    <select id="queryBillByUserId" resultType="java.util.List" parameterType="java.lang.Integer">
+    <select id="queryBillByUserId" resultType="com.cloudfly.start.bill.entity.BillBook" parameterType="java.lang.Integer">
         select book.book_name as bookName,
         book.create_date as createDate,
-        book.book_id as bookId,share.book_type as bookType from  bill_share share
-        inner join bill_book book on share.share_book_id = book.book_id
-        where user.user_id = ${userId}
+        book.book_id as bookId,
+        book.book_type book_type
+        from bill_book book
+        where book.user_id = ${userId}
+        union all
+        select book.book_id bookId,
+               book.create_date createDate,
+               book.book_name bookName,
+               share.book_type bookType
+        from bill_share share inner join bill_book book
+        on(share.share_book_id=book.book_id)
+        where share.share_user_id=${userId}
     </select>
 
     <select id="queryDefaultBillByUserId" parameterType="java.lang.Integer" resultType="com.cloudfly.start.bill.entity.BillBook">
@@ -16,6 +25,19 @@
                bb.book_name bookName
         from bill_book bb
         where bb.userId=#{userId,jdbcType=INTEGER}
-        and bb.is_default=1
+        and bb.book_type=1
     </select>
+
+    <update id="updateBillBookByUserId" parameterType="java.lang.Integer">
+        update bill_book bb
+        set bb.book_type=0
+        where bb.user_id=#{userId}
+        and bb.book_type=1
+    </update>
+
+    <update id="updateBillBookByBookId" parameterType="java.lang.Integer">
+        update bill_book bb
+        set bb.book_type=1
+        where bb.book_id=#{bookId}
+    </update>
 </mapper>

@@ -12,15 +12,15 @@ public class MonthBillReportService extends BaseBillReportServiceAbs {
      * @return
      */
     @Override
-    public Date countQueryStartDate() {
-        return DateUtil.getMonthFirstDay();
+    public Date countQueryStartTime() {
+        return DateUtil.getMonthFirstDay(this.getYear(),this.getMonth());
     }
 
     /**
      * @return
      */
     @Override
-    public Date countQueryEndDate() {
-        return DateUtil.getMonthLastDay();
+    public Date countQueryEndTime() {
+        return DateUtil.getMonthLastDay(this.getYear(),this.getMonth());
     }
 }

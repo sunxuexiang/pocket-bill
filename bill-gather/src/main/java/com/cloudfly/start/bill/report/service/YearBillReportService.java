@@ -15,16 +15,16 @@ public class YearBillReportService extends BaseBillReportServiceAbs {
      * @return Date
      */
     @Override
-    public Date countQueryStartDate() {
-        return DateUtil.getCurrYearFirst();
+    public Date countQueryStartTime() {
+        return DateUtil.getYearFirstDay(this.getYear());
     }
 
     /**
      * @return Date
      */
     @Override
-    public Date countQueryEndDate() {
-        return DateUtil.getCurrYearLast();
+    public Date countQueryEndTime() {
+        return DateUtil.getYearLastDay(this.getYear());
     }
 
 }

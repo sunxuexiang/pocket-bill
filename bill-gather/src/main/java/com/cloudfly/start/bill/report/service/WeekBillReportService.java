@@ -12,7 +12,7 @@ public class WeekBillReportService extends BaseBillReportServiceAbs {
      * @return
      */
     @Override
-    public Date countQueryStartDate() {
+    public Date countQueryStartTime() {
         return DateUtil.getWeekFirstDay();
     }
 
@@ -20,7 +20,7 @@ public class WeekBillReportService extends BaseBillReportServiceAbs {
      * @return
      */
     @Override
-    public Date countQueryEndDate() {
+    public Date countQueryEndTime() {
         return DateUtil.getWeekLastDay();
     }
 

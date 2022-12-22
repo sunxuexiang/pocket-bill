@@ -11,7 +11,11 @@ import java.util.List;
 @Mapper
 public interface BillBookMapper extends BaseMapper<BillBook>{
 
-    List<Bill> queryBillByUserId(@Param("userId") Integer userId);
+    List<BillBook> queryBillByUserId(@Param("userId") Integer userId);
 
     BillBook queryDefaultBillByUserId(@Param("userId") Integer userId);
+
+    void updateBillBookByUserId(@Param("userId")Integer userId);
+
+    void updateBillBookByBookId(@Param("bookId")Integer bookdId);
 }

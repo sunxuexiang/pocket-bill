@@ -5,8 +5,10 @@ import com.cloudfly.start.bill.entity.Bill;
 import com.cloudfly.start.bill.entity.BillBook;
 import com.cloudfly.start.bill.exception.BillSystemException;
 import com.cloudfly.start.bill.service.BillManageService;
+import com.cloudfly.start.bill.utils.JwtUtils;
 import com.cloudfly.start.bill.utils.R;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.ibatis.annotations.Param;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +64,10 @@ public class BillManageController {
     }
 
     @RequestMapping("/queryDefaultBillByUserId")
-    public R queryDefaultBillByUserId(@RequestParam("billId") Integer userId) {
-        logger.info("queryDefaultBillByUserId start with userId : [{}]",userId);
+    public R queryDefaultBillByUserId() {
+        logger.info("queryDefaultBillByUserId start ");
         try{
-            return R.ok().put(CommonContant.RESPONSE_FIELD,billManageService.queryDefaultBillByUserId(userId));
+            return R.ok().put(CommonContant.RESPONSE_FIELD,billManageService.queryDefaultBillByUserId());
         }catch (Exception e){
             logger.error("queryDefaultBillByUserId occured exception : {}", ExceptionUtils.getStackTrace(e));
             throw new BillSystemException(e.getMessage());
@@ -80,28 +82,23 @@ public class BillManageController {
      */
     @RequestMapping("/queryBillByUserId")
     public R queryBillByUserId(){
-        List<Bill> list=new ArrayList<>();
-        Bill bill1=new Bill();
-        bill1.setBillId(1);
-        bill1.setBookName("增加");
-        bill1.setCreateDate(new Date());
-        Bill bill2=new Bill();
-        bill2.setBillId(2);
-        bill2.setBookName("删除");
-        bill2.setCreateDate(new Date());
-        Bill bill3=new Bill();
-        bill3.setBillId(3);
-        bill3.setBookName("查询");
-        bill3.setCreateDate(new Date());
-        Bill bill4=new Bill();
-        bill4.setBillId(4);
-        bill4.setBookName("修改");
-        bill4.setCreateDate(new Date());
-        list.add(bill1);
-        list.add(bill2);
-        list.add(bill3);
-        list.add(bill4);
-        return R.ok().put("result",list);
-        //return billManageService.queryByUserIdList();
+        logger.info("queryBillByUserId start ");
+        try{
+            return R.ok().put(CommonContant.RESPONSE_FIELD,billManageService.queryBillByUserId());
+        }catch (Exception e){
+            logger.error("queryBillByUserId occured exception : {}", ExceptionUtils.getStackTrace(e));
+            throw new BillSystemException(e.getMessage());
+        }
+    }
+
+    /**
+     * @Description : 修改用户默认账单
+     * @author: Hulk
+     * @date : 2022/12/4 20:15
+     */
+    @RequestMapping("/updateDefaultBill")
+    public R updateDefaultBillByBookId(@RequestParam("bookId") Integer bookId){
+        billManageService.updateDefaultBill(bookId);
+        return R.ok();
     }
 }

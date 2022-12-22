@@ -36,8 +36,8 @@
                        ) bill_month
                 from bill_book_info bbi
                 where bbi.book_Id=#{bookId,jdbcType=INTEGER}
-                      and bbi.info_date <![CDATA[ >= ]]> #{startTime,javaType=DATE}
-                      and bbi.info_date <![CDATA[ <= ]]> #{endTime,javaType=DATE}
+                      and bbi.info_date <![CDATA[ >= ]]> #{startTime}
+                      and bbi.info_date <![CDATA[ <= ]]> #{endTime}
             ) t
             group by t.book_Id,t.bill_month,t.info_pay_type
         ) tt

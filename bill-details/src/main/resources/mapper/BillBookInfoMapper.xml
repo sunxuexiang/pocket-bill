@@ -22,15 +22,21 @@
                bbi.info_pay_type infoPayType,
                bbi.info_date infoDate
         from bill_book_Info bbi
-        where bbi.book_id=#{bookId,jdbcType=INTEGER}
+        where bbi.book_id=#{bookId,jdbcType=NUMERIC}
         <if test="#{userId} != null">
             and bbi.user_id=#{userId,jdbcType=INTEGER}
         </if>
-        <if test="#{infoMoney} != null">
-            and bbi.info_money=#{infoMoney,jdbcType=NUMERIC}
+        <if test="#{startTime} !=null">
+            and bbi.info_date <![CDATA[ >= ]]> #{startTime}
         </if>
-        <if test="#{infoDate} != null">
-            and bbi.info_date=#{infoDate}
+        <if test="#{endTime} !=null">
+            and bbi.info_date <![CDATA[ <= ]]> #{endTime}
+        </if>
+        <if test="#{startMoney} != null">
+            and bbi.info_money <![CDATA[ >= ]]> #{startMoney,jdbcType=NUMERIC}
+        </if>
+        <if test="#{endMoney} != null">
+            and bbi.info_money <![CDATA[ <= ]]> #{endMoney,jdbcType=NUMERIC}
         </if>
     </select>
 </mapper>

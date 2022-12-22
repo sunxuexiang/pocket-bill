@@ -8,7 +8,10 @@ import com.cloudfly.start.bill.mapper.BillBookInfoMapper;
 import com.cloudfly.start.bill.service.BillBookInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.math.BigDecimal;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -45,12 +48,13 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
     }
 
     /**
-     * @param billBookInfo
-     * @return
+     * @Descript
      */
     @Override
-    public Map<String,Object> queryBillDetailsCustomize(BillBookInfo billBookInfo) {
-        List<BillBookInfo> billBookInfos=billBookInfoMapper.queryBillDetailsCustomize(billBookInfo);
+    public Map<String,Object> queryBillDetailsCustomize(Integer bookId, Date startTime, Date endTime,
+                                                        BigDecimal startMoney, BigDecimal endMoney,String userName) {
+        List<BillBookInfo> billBookInfos=billBookInfoMapper.queryBillDetailsCustomize(bookId,startTime,
+                endTime, startMoney, endMoney,userName);
         long totalIn=0;
         long totalOut=0;
         for(BillBookInfo bbi:billBookInfos){

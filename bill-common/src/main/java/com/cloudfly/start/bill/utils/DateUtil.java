@@ -1,7 +1,12 @@
 package com.cloudfly.start.bill.utils;
 
+import com.cloudfly.start.bill.exception.BillSystemException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.Timestamp;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -17,10 +22,12 @@ import java.util.Locale;
 
 public class DateUtil {
 
+    private static Logger logger= LoggerFactory.getLogger(DateUtil.class);
     /**
      * 默认日期格式
      */
     public static String DEFAULT_FORMAT = "yyyy-MM-dd";
+    public static String DATE_TIME_PATTERN = "yyyy-MM-dd HH:mm:ss";
     /**
      * 格式化日期
      * @param date 日期对象
@@ -33,31 +40,11 @@ public class DateUtil {
     }
 
     /**
-     * 获取当年的第一天
-     * @return
-     */
-    public static Date getCurrYearFirst(){
-        Calendar currCal=Calendar.getInstance();
-        int currentYear = currCal.get(Calendar.YEAR);
-        return getYearFirst(currentYear);
-    }
-
-    /**
-     * 获取当年的最后一天
-     * @return
-     */
-    public static Date getCurrYearLast(){
-        Calendar currCal=Calendar.getInstance();
-        int currentYear = currCal.get(Calendar.YEAR);
-        return getYearLast(currentYear);
-    }
-
-    /**
      * 获取某年第一天日期
      * @param year 年份
      * @return Date
      */
-    public static Date getYearFirst(int year){
+    public static Date getYearFirstDay(int year){
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.set(Calendar.YEAR, year);
@@ -69,35 +56,68 @@ public class DateUtil {
      * 获取某年最后一天日期
      * @return Date
      */
-    public static Date getYearLast(int year){
+    public static Date getYearLastDay(int year){
         Calendar calendar = Calendar.getInstance();
         calendar.clear();
         calendar.set(Calendar.YEAR, year);
         calendar.roll(Calendar.DAY_OF_YEAR, -1);
-        Date currYearLast = calendar.getTime();
-        return currYearLast;
+
+        SimpleDateFormat format = new SimpleDateFormat(DATE_TIME_PATTERN);
+        //获取年
+        int tmpYear = calendar.get(Calendar.YEAR);
+        //获取月份，0表示1月份
+        int month = calendar.get(Calendar.MONTH) + 1;
+        //获取本月最大天数
+        int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+        try {
+            return format.parse(tmpYear+"-"+month+"-"+lastDay + " 23:59:59");
+        } catch (ParseException e) {
+            logger.error("getMonthLastDay occur exception");
+            throw new BillSystemException(e.getMessage());
+        }
     }
 
     /**
-     * 获取当月第一天日期
+     * 获取指定年月第一天
      * @return Date
-     */
-    public static Date getMonthFirstDay(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.set(Calendar.DAY_OF_MONTH, 1);
-        return calendar.getTime();
+     * */
+    public static Date getMonthFirstDay(int year,int month){
+        Calendar cal = Calendar.getInstance();
+        //设置年份
+        cal.set(Calendar.YEAR,year);
+        //设置月份
+        cal.set(Calendar.MONTH, month-1);
+        SimpleDateFormat format = new SimpleDateFormat(DATE_TIME_PATTERN);
+        //获取本月第一天
+        int firstDay = cal.getActualMinimum(Calendar.DAY_OF_MONTH);
+        try {
+            return format.parse(year+"-"+month+"-"+firstDay + " 00:00:00");
+        } catch (ParseException e) {
+            logger.error("getMonthFirstDay occur exception");
+            throw new BillSystemException(e.getMessage());
+        }
     }
 
     /**
-     * 获取当月第一天日期
+     * 获取指定年月最后一天
      * @return Date
-     */
-    public static Date getMonthLastDay(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(new Date());
-        calendar.roll(Calendar.DAY_OF_MONTH, -1);
-        return calendar.getTime();
+     * */
+    public static Date getMonthLastDay(int year,int month){
+        Calendar cal = Calendar.getInstance();
+        //设置年份
+        cal.set(Calendar.YEAR,year);
+        //设置月份
+        cal.set(Calendar.MONTH, month-1);
+
+        SimpleDateFormat format = new SimpleDateFormat(DATE_TIME_PATTERN);
+        //获取本月最大天数
+        int lastDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        try {
+            return format.parse(year+"-"+month+"-"+lastDay + " 23:59:59");
+        } catch (ParseException e) {
+            logger.error("getMonthLastDay occur exception");
+            throw new BillSystemException(e.getMessage());
+        }
     }
 
 

@@ -9,6 +9,8 @@ import com.cloudfly.start.bill.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("billManageService")
 public class BillManageServiceImpl extends ServiceImpl<BillBookMapper,BillBook> implements BillManageService{
 
@@ -40,17 +42,27 @@ public class BillManageServiceImpl extends ServiceImpl<BillBookMapper,BillBook> 
     }
 
     @Override
-    public R queryByUserIdList() {
-        return R.ok(baseMapper.queryBillByUserId(JwtUtils.getCurrentLoginUser()));
+    public List<BillBook> queryBillByUserId() {
+        return baseMapper.queryBillByUserId(JwtUtils.getCurrentLoginUser());
     }
 
     /**
-     * @param userId
+     * @param
      * @return
      */
     @Override
-    public BillBook queryDefaultBillByUserId(Integer userId) {
-        return billBookMapper.queryDefaultBillByUserId(userId);
+    public BillBook queryDefaultBillByUserId() {
+        return billBookMapper.queryDefaultBillByUserId(JwtUtils.getCurrentLoginUser());
+    }
+
+    /**
+     *
+     */
+    @Override
+    public void updateDefaultBill(Integer bookId) {
+        billBookMapper.updateBillBookByUserId(JwtUtils.getCurrentLoginUser());
+        billBookMapper.updateBillBookByBookId(bookId);
+
     }
 
 }
