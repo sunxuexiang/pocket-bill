@@ -54,15 +54,15 @@ public class BillBookInfoController{
      * @Description用户自定义查询账单
      * */
     @RequestMapping("/queryBillDetailsCustomize")
-    public R queryBillDetailsCustomize(@RequestParam("bookId")Integer bookId, @RequestParam(value="bookContent",required = false)String bookContent,
+    public R queryBillDetailsCustomize(@RequestParam("bookId")Integer bookId, @RequestParam(value="infoRemark",required = false)String infoRemark,
                                        @RequestParam(value="startTime",required = false) Date startTime, @RequestParam(value="endTime",required = false)Date endTime,
                                        @RequestParam(value="startMoney",required = false)BigDecimal startMoney, @RequestParam(value="endMoney",required = false)BigDecimal endMoney,
                                        @RequestParam(value="userName",required = false)String userName){
-        logger.info("queryBillDetailsCustomize start with bookId:[{}],startTime:[{}],endTime:[{}]" +
-                ",startMoney:[{}],endMoney:[{}],userName:[[]]",bookId,startTime,endTime,startMoney,endMoney,userName);
+        logger.info("queryBillDetailsCustomize start with bookId:[{}],infoRemak:[{}],startTime:[{}],endTime:[{}]" +
+                ",startMoney:[{}],endMoney:[{}],userName:[[]]",bookId,infoRemark,startTime,endTime,startMoney,endMoney,userName);
         try{
             return R.ok().put(CommonContant.RESPONSE_FIELD,
-                    billBookInfoService.queryBillDetailsCustomize(bookId, startTime, endTime, startMoney,endMoney,userName));
+                    billBookInfoService.queryBillDetailsCustomize(bookId, infoRemark,startTime, endTime, startMoney,endMoney,userName));
         }catch (Exception e){
             logger.error("queryBillDetailsCustomize occured exception : {}", ExceptionUtils.getStackTrace(e));
             throw new BillSystemException(e.getMessage());

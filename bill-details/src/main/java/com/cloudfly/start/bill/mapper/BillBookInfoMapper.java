@@ -11,7 +11,8 @@ import java.util.List;
 
 public interface BillBookInfoMapper extends BaseMapper<BillBookInfo> {
 
-    List<BillBookInfo> queryBillDetailsCustomize(@Param("bookId")Integer bookId, @Param("startTime") Date startTime,
-                                                 @Param("endTime")Date endTime, @Param("startMoney") BigDecimal startMoney,
-                                                 @Param("endMoney")BigDecimal endMoney,@Param("userName")String userName);
+    List<BillBookInfo> queryBillDetailsCustomize(@Param("bookId")Integer bookId, @Param("infoRemark")String infoRemark,
+                                                 @Param("startTime") Date startTime, @Param("endTime")Date endTime,
+                                                 @Param("startMoney") BigDecimal startMoney, @Param("endMoney")BigDecimal endMoney,
+                                                 @Param("userName")String userName);
 }

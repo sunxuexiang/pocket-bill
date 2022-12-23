@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @TableName( "bill_book_info")
@@ -17,7 +18,7 @@ public class BillBookInfo implements Serializable {
     private String bookId;
     private String payId;
     private String typeId;
-    private Double infoMoney;
+    private BigDecimal infoMoney;
     private String infoImg;
     private int infoRapType;
     private Date infoDate;
@@ -75,11 +76,11 @@ public class BillBookInfo implements Serializable {
         this.bookId = bookId;
     }
 
-    public Double getInfoMoney() {
+    public BigDecimal getInfoMoney() {
         return infoMoney;
     }
 
-    public void setInfoMoney(Double infoMoney) {
+    public void setInfoMoney(BigDecimal infoMoney) {
         this.infoMoney = infoMoney;
     }
 

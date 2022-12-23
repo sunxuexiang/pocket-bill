@@ -12,7 +12,7 @@
 
 
 
-    <select id="queryBillDetailsCustomize" parameterType="com.cloudfly.start.bill.entity.BillBookInfo" resultType="java.util.List">
+    <select id="queryBillDetailsCustomize" resultType="com.cloudfly.start.bill.entity.BillBookInfo">
         select bbi.info_id infoId,
                bbi.book_id bookId,
                bbi.user_id userId,
@@ -23,20 +23,24 @@
                bbi.info_date infoDate
         from bill_book_Info bbi
         where bbi.book_id=#{bookId,jdbcType=NUMERIC}
-        <if test="#{userId} != null">
+        <if test="userName != null">
             and bbi.user_id=#{userId,jdbcType=INTEGER}
         </if>
-        <if test="#{startTime} !=null">
+        <if test="startTime !=null">
             and bbi.info_date <![CDATA[ >= ]]> #{startTime}
         </if>
-        <if test="#{endTime} !=null">
+        <if test="endTime !=null">
             and bbi.info_date <![CDATA[ <= ]]> #{endTime}
         </if>
-        <if test="#{startMoney} != null">
+        <if test="startMoney != null">
             and bbi.info_money <![CDATA[ >= ]]> #{startMoney,jdbcType=NUMERIC}
         </if>
-        <if test="#{endMoney} != null">
+        <if test="endMoney != null">
             and bbi.info_money <![CDATA[ <= ]]> #{endMoney,jdbcType=NUMERIC}
         </if>
+        <if test="infoRemark !=null">
+            and bbi.info_remark=#{infoRemark,jdbcType=VARCHAR}
+        </if>
+        order by bbi.info_date desc
     </select>
 </mapper>

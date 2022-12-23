@@ -17,6 +17,6 @@ public interface BillBookInfoService extends IService<BillBookInfo> {
 
     void removeBookInfoById(String bookInfoId);
 
-    Map<String,Object> queryBillDetailsCustomize(Integer bookId, Date startTime, Date endTime,
+    Map<String,Object> queryBillDetailsCustomize(Integer bookId, String infoRemark,Date startTime, Date endTime,
                                                  BigDecimal startMoney, BigDecimal endMoney,String userName);
 }

@@ -25,8 +25,8 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
     @Override
     public Map<String,Object> queryAnnualSummaryReportList(int bookId,int year) {
 
-        Date startTime= DateUtil.getYearFirst(year);
-        Date endTime= DateUtil.getYearLast(year);
+        Date startTime= DateUtil.getYearFirstDay(year);
+        Date endTime= DateUtil.getYearLastDay(year);
         List<Map<String,BigDecimal>> resultList=billBookAnnualSummaryMapper.queryAnnualSummaryReportList(bookId,startTime,endTime);
         BigDecimal yearTotalIn=new BigDecimal(0);
         BigDecimal yearTotalOut=new BigDecimal(0);
