@@ -1,5 +1,7 @@
 package com.cloudfly.start.bill.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -23,9 +25,13 @@ public class BillBookInfo implements Serializable {
     private int infoRapType;
     private Date infoDate;
     private String infoRemark;
+    @TableField(fill = FieldFill.INSERT)
     private Date createDate;
+    @TableField(fill = FieldFill.INSERT)
     private Integer createBy;
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateDate;
+    @TableField(fill = FieldFill.UPDATE)
     private Integer updateBy;
 
     public Integer getInfoId() {

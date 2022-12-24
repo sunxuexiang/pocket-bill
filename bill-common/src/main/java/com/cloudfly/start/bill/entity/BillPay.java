@@ -1,5 +1,7 @@
 package com.cloudfly.start.bill.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -10,9 +12,13 @@ public class BillPay {
     @TableId
     private Integer payId;
     private String payType;
+    @TableField(fill = FieldFill.INSERT)
     private Date createDate;
+    @TableField(fill = FieldFill.INSERT)
     private int createBy;
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateDate;
+    @TableField(fill = FieldFill.UPDATE)
     private int updateBy;
 
     public Integer getPayId() {

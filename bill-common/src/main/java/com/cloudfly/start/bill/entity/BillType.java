@@ -1,9 +1,12 @@
 package com.cloudfly.start.bill.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import javax.print.attribute.standard.Fidelity;
 import java.util.Date;
 
 @Data
@@ -11,20 +14,24 @@ import java.util.Date;
 public class BillType {
 
     @TableId
-    private Integer type_id;
+    private int type_id;
     private String typeIcon;
     private String typeName;
     private String type;
+    @TableField(fill = FieldFill.INSERT)
     private Date createDate;
+    @TableField(fill = FieldFill.INSERT)
     private int createBy;
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateDate;
+    @TableField(fill = FieldFill.UPDATE)
     private int updateBy;
 
-    public Integer getType_id() {
+    public int getType_id() {
         return type_id;
     }
 
-    public void setType_id(Integer type_id) {
+    public void setType_id(int type_id) {
         this.type_id = type_id;
     }
 

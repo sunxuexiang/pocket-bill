@@ -1,5 +1,7 @@
 package com.cloudfly.start.bill.entity;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.util.Date;
@@ -15,9 +17,13 @@ public class BillRout {
     private Integer routId;
     private Integer routType;
     private Integer routValue;
+    @TableField(fill = FieldFill.INSERT)
     private Date createDate;
+    @TableField(fill = FieldFill.INSERT)
     private Integer createBy;
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateDate;
+    @TableField(fill = FieldFill.UPDATE)
     private Integer updateBy;
 
     public Integer getRoutId() {

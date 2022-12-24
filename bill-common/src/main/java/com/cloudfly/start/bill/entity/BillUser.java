@@ -1,8 +1,6 @@
 package com.cloudfly.start.bill.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,9 +17,13 @@ public class BillUser {
     private String userSex;
     private Integer userIntegral;
     private Integer userInvitation;
+    @TableField(fill = FieldFill.INSERT)
     private Date createDate;
+    @TableField(fill = FieldFill.INSERT)
     private int createBy;
+    @TableField(fill = FieldFill.UPDATE)
     private Date updateDate;
+    @TableField(fill = FieldFill.UPDATE)
     private int updateBy;
 
     public Integer getUserId() {
