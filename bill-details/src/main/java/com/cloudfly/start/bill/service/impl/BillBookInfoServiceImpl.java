@@ -47,9 +47,6 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
         this.removeById(bookInfoId);
     }
 
-    /**
-     * @Descript
-     */
     @Override
     public Map<String,Object> queryBillDetailsCustomize(Integer bookId, String infoRemark,Date startTime, Date endTime,
                                                         BigDecimal startMoney, BigDecimal endMoney,String userName) {

@@ -16,8 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.text.SimpleDateFormat;
 
 /**
  * @BelongsProject: pocket-bill
@@ -35,16 +34,31 @@ public class BillBookInfoController{
     @Autowired
     BillBookInfoService billBookInfoService;
 
+    /**
+     * @Description: 新增账单明细
+     * @author lightning
+     * @date 2022/12/24 11:39
+     */
     @RequestMapping("/addBookInfo")
     public void addBookInfo(@RequestBody BillBookInfo billBookInfo){
         billBookInfoService.addBookInfo(billBookInfo);
     }
 
+    /**
+     * @Description: 修改账单明细
+     * @author lightning
+     * @date 2022/12/24 11:40
+     */
     @RequestMapping("/updateBookInfo")
     public void updateBookInfoById(@RequestBody BillBookInfo billBookInfo){
         billBookInfoService.updateBookInfoById(billBookInfo);
     }
 
+    /**
+     * @Description: 删除账单明细
+     * @author lightning
+     * @date 2022/12/24 11:40
+     */
     @RequestMapping("/removeBookInfo")
     public void removeBookInfoById(@RequestParam("bookInfoId") String bookInfoId){
         billBookInfoService.removeBookInfoById(bookInfoId);
@@ -55,14 +69,17 @@ public class BillBookInfoController{
      * */
     @RequestMapping("/queryBillDetailsCustomize")
     public R queryBillDetailsCustomize(@RequestParam("bookId")Integer bookId, @RequestParam(value="infoRemark",required = false)String infoRemark,
-                                       @RequestParam(value="startTime",required = false) Date startTime, @RequestParam(value="endTime",required = false)Date endTime,
+                                       @RequestParam(value="startTime",required = false) String startTime, @RequestParam(value="endTime",required = false)String endTime,
                                        @RequestParam(value="startMoney",required = false)BigDecimal startMoney, @RequestParam(value="endMoney",required = false)BigDecimal endMoney,
                                        @RequestParam(value="userName",required = false)String userName){
         logger.info("queryBillDetailsCustomize start with bookId:[{}],infoRemak:[{}],startTime:[{}],endTime:[{}]" +
                 ",startMoney:[{}],endMoney:[{}],userName:[[]]",bookId,infoRemark,startTime,endTime,startMoney,endMoney,userName);
         try{
+            SimpleDateFormat sdf=new SimpleDateFormat(DateUtil.DATE_TIME_PATTERN);
+
             return R.ok().put(CommonContant.RESPONSE_FIELD,
-                    billBookInfoService.queryBillDetailsCustomize(bookId, infoRemark,startTime, endTime, startMoney,endMoney,userName));
+                    billBookInfoService.queryBillDetailsCustomize(bookId, infoRemark,sdf.parse(startTime),
+                            sdf.parse(endTime), startMoney,endMoney,userName));
         }catch (Exception e){
             logger.error("queryBillDetailsCustomize occured exception : {}", ExceptionUtils.getStackTrace(e));
             throw new BillSystemException(e.getMessage());

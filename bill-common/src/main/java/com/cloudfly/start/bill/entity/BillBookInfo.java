@@ -2,6 +2,7 @@ package com.cloudfly.start.bill.entity;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,6 +19,7 @@ public class BillBookInfo implements Serializable {
     private String bookId;
     private String payId;
     private String typeId;
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal infoMoney;
     private String infoImg;
     private int infoRapType;

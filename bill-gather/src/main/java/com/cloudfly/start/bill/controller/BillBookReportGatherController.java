@@ -33,6 +33,12 @@ public class BillBookReportGatherController {
     @Autowired
     private WeekBillReportService weekBillReportService;
 
+    /**
+     * @Description: 查询报表按年
+     * @author lightning
+     * @date 2022/12/24 11:41
+     * @return R
+     */
     @RequestMapping("/queryReporyByYear")
     public R queryReporyByYear(@RequestParam("bookId") Integer bookId, @RequestParam("infoPayType") String infoPayType,
                                @RequestParam("year") int year){
@@ -46,6 +52,12 @@ public class BillBookReportGatherController {
         }
     }
 
+    /**
+     * @Description: 查询报表按月
+     * @author lightning
+     * @date 2022/12/24 11:42
+     * @return R
+     */
     @RequestMapping("/queryReporyByMonth")
     public R queryReporyByMonth(@RequestParam("bookId") Integer bookId, @RequestParam("infoPayType") String infoPayType,
                                 @RequestParam("year") int year, @RequestParam("month") int month){
@@ -58,6 +70,12 @@ public class BillBookReportGatherController {
         }
     }
 
+    /**
+     * @Description: 查询报表按周
+     * @author lightning
+     * @date 2022/12/24 11:42
+     * @return R
+     */
     @RequestMapping("/queryReporyByWeek")
     public R queryReporyByWeek(@RequestParam("bookId") Integer bookId,
                                @RequestParam("infoPayType") String infoPayType){

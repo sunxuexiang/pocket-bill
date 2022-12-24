@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.Date;
 import java.util.List;
 
-public abstract class BaseBillReportServiceAbs implements BaseBillReportService {
+public abstract class AbstractBillReportService implements BaseBillReportService {
 
     @Autowired
     private BillBookReportGatherMapper billReportMapper;
@@ -53,12 +53,19 @@ public abstract class BaseBillReportServiceAbs implements BaseBillReportService 
         return billReportMapper.generateReport(startTime,endTime,infoPayType);
     }
     /**
-     * 计算当前报表查询开始时间
-     * */
+     * @Description: 计算报表查询开始时间
+     * @author lightning
+     * @date 2022/12/24 11:44
+     * @return Date
+     */
     public abstract Date countQueryStartTime();
+
     /**
-     * 计算当前报表查询结束时间
-     * */
+     * @Description: 计算报表查询结束时间
+     * @author lightning
+     * @date 2022/12/24 11:44
+     * @return Date
+     */
     public abstract Date countQueryEndTime();
 
 }

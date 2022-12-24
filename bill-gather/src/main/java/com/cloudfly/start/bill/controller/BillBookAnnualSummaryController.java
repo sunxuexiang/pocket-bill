@@ -30,9 +30,11 @@ public class BillBookAnnualSummaryController {
     BillBookAnnualSummaryService billBookAnnualSummaryService;
 
     /**
-     * @Description 计算年度账单，汇总一年的数据显示
-     * @author : ligntning
-     * */
+     * @Description: 计算年度账单，汇总一年的数据显示
+     * @author lightning
+     * @date 2022/12/24 11:41
+     * @return R
+     */
     @RequestMapping("/queryAnnualSummaryReportList")
     public R queryAnnualSummaryReportList(@RequestParam("bookId") int bookId,@RequestParam("year") int year){
         logger.info("queryAnnualSummaryReportList start with bookId={},year={}",bookId,year);

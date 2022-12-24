@@ -63,6 +63,12 @@ public class BillManageController {
         return billManageService.queryByBillId(billId);
     }
 
+    /**
+     * @Description: 查询用户默认账本
+     * @author lightning
+     * @date 2022/12/24 16:12
+     * @return R
+     */
     @RequestMapping("/queryDefaultBillByUserId")
     public R queryDefaultBillByUserId() {
         logger.info("queryDefaultBillByUserId start ");
