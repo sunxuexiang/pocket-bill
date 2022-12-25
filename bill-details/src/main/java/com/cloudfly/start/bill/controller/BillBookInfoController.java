@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 /**
@@ -71,22 +72,15 @@ public class BillBookInfoController{
     public R queryBillDetailsCustomize(@RequestParam("bookId")Integer bookId, @RequestParam(value="infoRemark",required = false)String infoRemark,
                                        @RequestParam(value="startTime",required = false) String startTime, @RequestParam(value="endTime",required = false)String endTime,
                                        @RequestParam(value="startMoney",required = false)BigDecimal startMoney, @RequestParam(value="endMoney",required = false)BigDecimal endMoney,
-                                       @RequestParam(value="userName",required = false)String userName){
+                                       @RequestParam(value="userName",required = false)String userName) throws ParseException {
         logger.info("queryBillDetailsCustomize start with bookId:[{}],infoRemak:[{}],startTime:[{}],endTime:[{}]" +
                 ",startMoney:[{}],endMoney:[{}],userName:[[]]",bookId,infoRemark,startTime,endTime,startMoney,endMoney,userName);
-        try{
+
             SimpleDateFormat sdf=new SimpleDateFormat(DateUtil.DATE_TIME_PATTERN);
 
             return R.ok().put(CommonContant.RESPONSE_FIELD,
                     billBookInfoService.queryBillDetailsCustomize(bookId, infoRemark,sdf.parse(startTime),
                             sdf.parse(endTime), startMoney,endMoney,userName));
-        }catch (Exception e){
-            logger.error("queryBillDetailsCustomize occured exception : {}", ExceptionUtils.getStackTrace(e));
-            throw new BillSystemException(e.getMessage());
-        }
-    }
 
-    public static void main(String[] args) {
-        System.out.println(DateUtil.getMonthLastDay(2019,2));
     }
 }

@@ -72,12 +72,9 @@ public class BillManageController {
     @RequestMapping("/queryDefaultBillByUserId")
     public R queryDefaultBillByUserId() {
         logger.info("queryDefaultBillByUserId start ");
-        try{
-            return R.ok().put(CommonContant.RESPONSE_FIELD,billManageService.queryDefaultBillByUserId());
-        }catch (Exception e){
-            logger.error("queryDefaultBillByUserId occured exception : {}", ExceptionUtils.getStackTrace(e));
-            throw new BillSystemException(e.getMessage());
-        }
+
+        return R.ok().put(CommonContant.RESPONSE_FIELD,billManageService.queryDefaultBillByUserId());
+
     }
 
 
@@ -89,12 +86,9 @@ public class BillManageController {
     @RequestMapping("/queryBillByUserId")
     public R queryBillByUserId(){
         logger.info("queryBillByUserId start ");
-        try{
-            return R.ok().put(CommonContant.RESPONSE_FIELD,billManageService.queryBillByUserId());
-        }catch (Exception e){
-            logger.error("queryBillByUserId occured exception : {}", ExceptionUtils.getStackTrace(e));
-            throw new BillSystemException(e.getMessage());
-        }
+
+        return R.ok().put(CommonContant.RESPONSE_FIELD,billManageService.queryBillByUserId());
+
     }
 
     /**
@@ -104,7 +98,10 @@ public class BillManageController {
      */
     @RequestMapping("/updateDefaultBill")
     public R updateDefaultBillByBookId(@RequestParam("bookId") Integer bookId){
+        logger.info("updateDefaultBill start with bookId:[{}]",bookId);
+
         billManageService.updateDefaultBill(bookId);
         return R.ok();
+
     }
 }

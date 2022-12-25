@@ -24,4 +24,16 @@
         where user.user_id = ${userId}
     </select>
 
+    <select id="queryBillByBookIdAndUserId" resultType="com.cloudfly.start.bill.entity.BillBook">
+        select bill_id
+        from bill_book bb
+        where bb.book_id=#{bookId,jdbcType=NUMERIC}
+        and bb.user_id=#{userId,jdbcType=INTEGER}
+    </select>
+
+    <select id="updateShareBillBatch">
+        update bill_share bs set bs.share_power=#{sharePower,jdbcType=INTEGER}
+        where bs.book_id=#{bookId,jdbcType=NUMERIC}
+    </select>
+
 </mapper>

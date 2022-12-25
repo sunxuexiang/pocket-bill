@@ -80,11 +80,7 @@ public class BillBookReportGatherController {
     public R queryReporyByWeek(@RequestParam("bookId") Integer bookId,
                                @RequestParam("infoPayType") String infoPayType){
         logger.info(" queryReporyByWeek start with bookId={},infoPayType={}",bookId,infoPayType);
-        try {
-            return R.ok().put(CommonContant.RESPONSE_FIELD,weekBillReportService.generateReport(infoPayType,0,0));
-        }catch(Exception e){
-            logger.error("queryReporyByWeek occured exception : {}", ExceptionUtils.getStackTrace(e));
-            throw new BillSystemException(e.getMessage());
-        }
+
+        return R.ok().put(CommonContant.RESPONSE_FIELD,weekBillReportService.generateReport(infoPayType,0,0));
     }
 }

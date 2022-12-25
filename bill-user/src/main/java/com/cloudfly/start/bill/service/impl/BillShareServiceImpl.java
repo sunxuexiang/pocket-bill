@@ -17,6 +17,9 @@ public class BillShareServiceImpl extends ServiceImpl<BillShareMapper,BillShare>
     @Autowired
     private BillManageServiceImpl billManageService;
 
+    @Autowired
+    private BillShareMapper billShareMapper;
+
     @Override
     public R queryByBillAndUserId(Integer billId) {
         BillBook byId = billManageService.getById(billId);
@@ -40,5 +43,22 @@ public class BillShareServiceImpl extends ServiceImpl<BillShareMapper,BillShare>
             return R.ok("添加成功");
         }
         return R.error();
+    }
+
+    /**
+     * @param bookId
+     * @return
+     */
+    @Override
+    public BillBook queryBillByBookIdAndUserId(Integer bookId) {
+        return billShareMapper.queryBillByBookIdAndUserId(bookId,JwtUtils.getCurrentLoginUser());
+    }
+
+    /**
+     * @param bookId
+     */
+    @Override
+    public void updateShareBillBatch(Integer bookId) {
+        billShareMapper.updateShareBillBatch(bookId);
     }
 }

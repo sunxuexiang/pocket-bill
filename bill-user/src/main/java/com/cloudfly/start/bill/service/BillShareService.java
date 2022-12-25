@@ -1,6 +1,7 @@
 package com.cloudfly.start.bill.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.cloudfly.start.bill.entity.BillBook;
 import com.cloudfly.start.bill.entity.BillShare;
 import com.cloudfly.start.bill.utils.R;
 
@@ -13,5 +14,9 @@ public interface BillShareService extends IService<BillShare>{
     R addShare(BillShare billShare);
 
     R updateShareByBill(BillShare list);
+
+    BillBook queryBillByBookIdAndUserId(Integer bookId);
+
+    void updateShareBillBatch(Integer bookId);
 
 }

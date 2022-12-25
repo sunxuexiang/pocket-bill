@@ -38,11 +38,6 @@ public class BillBookAnnualSummaryController {
     @RequestMapping("/queryAnnualSummaryReportList")
     public R queryAnnualSummaryReportList(@RequestParam("bookId") int bookId,@RequestParam("year") int year){
         logger.info("queryAnnualSummaryReportList start with bookId={},year={}",bookId,year);
-        try {
-            return R.ok().put(CommonContant.RESPONSE_FIELD,billBookAnnualSummaryService.queryAnnualSummaryReportList(bookId,year));
-        }catch (Exception e){
-            logger.error("queryAnnualSummaryReportList occured exception : {}", ExceptionUtils.getStackTrace(e));
-            throw new BillSystemException(e.getMessage());
-        }
+        return R.ok().put(CommonContant.RESPONSE_FIELD,billBookAnnualSummaryService.queryAnnualSummaryReportList(bookId,year));
     }
 }
