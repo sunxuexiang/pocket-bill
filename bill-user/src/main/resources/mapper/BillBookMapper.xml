@@ -24,7 +24,7 @@
                bb.book_id bookId,
                bb.book_name bookName
         from bill_book bb
-        where bb.userId=#{userId,jdbcType=INTEGER}
+        where bb.user_Id=#{userId,jdbcType=INTEGER}
         and bb.book_type=1
     </select>
 

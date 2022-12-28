@@ -11,4 +11,6 @@ public interface BillTypeService extends IService<BillType>{
 
    R queryType(int type);
 
+   R removeType(BillType billType);
+
 }

@@ -14,7 +14,7 @@ import java.util.Date;
 public class BillType {
 
     @TableId
-    private int type_id;
+    private int typeId;
     private String typeIcon;
     private String typeName;
     private String type;
@@ -27,12 +27,40 @@ public class BillType {
     @TableField(fill = FieldFill.UPDATE)
     private int updateBy;
 
-    public int getType_id() {
-        return type_id;
+    private int parentId;
+    private int isDelete;
+    private int userId;
+
+    public int getUserId() {
+        return userId;
     }
 
-    public void setType_id(int type_id) {
-        this.type_id = type_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getParentId() {
+        return parentId;
+    }
+
+    public void setParentId(int parentId) {
+        this.parentId = parentId;
+    }
+
+    public int getIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(int isDelete) {
+        this.isDelete = isDelete;
+    }
+
+    public int getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(int typeId) {
+        this.typeId = typeId;
     }
 
     public String getTypeIcon() {
@@ -94,7 +122,7 @@ public class BillType {
     @Override
     public String toString() {
         return "BillType{" +
-                "type_id=" + type_id +
+                "typeId=" + typeId +
                 ", typeIcon='" + typeIcon + '\'' +
                 ", typeName='" + typeName + '\'' +
                 ", type='" + type + '\'' +
