@@ -6,6 +6,7 @@ import com.cloudfly.start.bill.contants.CommonContant;
 import com.cloudfly.start.bill.entity.BillBookInfo;
 import com.cloudfly.start.bill.mapper.BillBookInfoMapper;
 import com.cloudfly.start.bill.service.BillBookInfoService;
+import com.cloudfly.start.bill.utils.JwtUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +29,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
      */
     @Override
     public void addBookInfo(BillBookInfo billBookInfo) {
+        billBookInfo.setUserId(JwtUtils.getCurrentLoginUser());
         this.save(billBookInfo);
     }
 
@@ -64,7 +66,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
             BillBookInfo bbid=billBookInfos.get(i);
             String bbisDay=sdf.format(bbis.getInfoDate());
             String bbidDay=sdf.format(bbid.getInfoDate());
-            if(bbis.getInfoRapType()==1){
+            if(bbis.getInfoPayType()==1){
                 totalIn=totalIn.add(bbis.getInfoMoney());
             }else{
                 totalOut=totalOut.add(bbis.getInfoMoney());
@@ -86,7 +88,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
                 details=new HashMap<>();
             }
             if(i==billBookInfos.size()-2){
-                if(bbis.getInfoRapType()==1){
+                if(bbis.getInfoPayType()==1){
                     totalIn=totalIn.add(bbis.getInfoMoney());
                 }else{
                     totalOut=totalOut.add(bbis.getInfoMoney());
@@ -113,7 +115,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
     }
 
     private void concatDayInOrOut(BillBookInfo bbi,Map<String,Object> details){
-        if(bbi.getInfoRapType()==1){
+        if(bbi.getInfoPayType()==1){
             details.put("dayIn",((BigDecimal)details.get("dayIn")).add(bbi.getInfoMoney()));
         }else{
             details.put("dayOut",((BigDecimal)details.get("dayOut")).add(bbi.getInfoMoney()));

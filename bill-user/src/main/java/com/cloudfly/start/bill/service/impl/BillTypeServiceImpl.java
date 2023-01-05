@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Service("billTypeService")
 public class BillTypeServiceImpl extends ServiceImpl<BillTypeMapper,BillType> implements BillTypeService{
@@ -30,6 +31,32 @@ public class BillTypeServiceImpl extends ServiceImpl<BillTypeMapper,BillType> im
 
     @Override
     public R queryType(int type) {
-        return R.ok(baseMapper.selectList(new LambdaQueryWrapper<BillType>().eq(BillType::getType,type)));
+        List<BillType> billTypes = baseMapper.queryList(JwtUtils.getCurrentLoginUser(),type);
+        return R.ok(billTypes);
+    }
+
+    @Override
+    public R removeType(BillType billType) {
+        // 查询当前删除类型
+        BillType billType1 = baseMapper.selectById(billType.getTypeId());
+        if (billType1.getUserId() == 9999) {
+            // 表示为系统图标 增加一个记录
+            billType.setTypeId(0);
+            billType.setType(billType1.getType());
+            billType.setTypeIcon(billType1.getTypeIcon());
+            billType.setIsDelete(1);
+            billType.setTypeName(billType1.getTypeName());
+            billType.setUserId(JwtUtils.getCurrentLoginUser());
+            billType.setParentId(billType1.getTypeId());
+            if (baseMapper.insert(billType) > 0) {
+                return R.ok();
+            }
+        } else {
+            billType.setIsDelete(1);
+            if (baseMapper.updateById(billType) > 0) {
+                return R.ok();
+            }
+        }
+        return R.error();
     }
 }

@@ -24,8 +24,13 @@
                bb.book_id bookId,
                bb.book_name bookName
         from bill_book bb
+<<<<<<< .mine
         left join bill_share bs
         where bb.userId=#{userId,jdbcType=INTEGER}
+=======
+        where bb.user_Id=#{userId,jdbcType=INTEGER}
+
+>>>>>>> .theirs
         and bb.book_type=1
         union all
         select bs.share_user_id userId,

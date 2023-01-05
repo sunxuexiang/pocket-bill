@@ -1,9 +1,6 @@
 package com.cloudfly.start.bill.entity;
 
-import com.baomidou.mybatisplus.annotation.FieldFill;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.io.Serializable;
@@ -15,16 +12,16 @@ public class BillBookInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId
+    @TableId(value = "info_id", type = IdType.AUTO)
     private Integer infoId;
-    private String userId;
-    private String bookId;
-    private String payId;
-    private String typeId;
+    private Integer userId;
+    private Integer bookId;
+    private String payName;
+    private Integer typeId;
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private BigDecimal infoMoney;
     private String infoImg;
-    private int infoRapType;
+    private int infoPayType;
     private Date infoDate;
     private String infoRemark;
     @TableField(fill = FieldFill.INSERT)
@@ -44,44 +41,21 @@ public class BillBookInfo implements Serializable {
         this.infoId = infoId;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getPayName() {
+        return payName;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setPayName(String payName) {
+        this.payName = payName;
     }
 
-    public String getPayId() {
-        return payId;
+
+    public int getInfoPayType() {
+        return infoPayType;
     }
 
-    public void setPayId(String payId) {
-        this.payId = payId;
-    }
-
-    public String getTypeId() {
-        return typeId;
-    }
-
-    public void setTypeId(String typeId) {
-        this.typeId = typeId;
-    }
-
-    public int getInfoRapType() {
-        return infoRapType;
-    }
-
-    public void setInfoRapType(int infoRapType) {
-        this.infoRapType = infoRapType;
-    }
-
-    public String getBookId() {
-        return bookId;
-    }
-
-    public void setBookId(String bookId) {
-        this.bookId = bookId;
+    public void setInfoPayType(int infoPayType) {
+        this.infoPayType = infoPayType;
     }
 
     public BigDecimal getInfoMoney() {
@@ -148,17 +122,41 @@ public class BillBookInfo implements Serializable {
         this.updateBy = updateBy;
     }
 
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public Integer getBookId() {
+        return bookId;
+    }
+
+    public void setBookId(Integer bookId) {
+        this.bookId = bookId;
+    }
+
+    public Integer getTypeId() {
+        return typeId;
+    }
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
     @Override
     public String toString() {
         return "BillBookInfo{" +
                 "infoId=" + infoId +
                 ", userId='" + userId + '\'' +
                 ", bookId='" + bookId + '\'' +
-                ", payId='" + payId + '\'' +
+                ", payName='" + payName + '\'' +
                 ", typeId='" + typeId + '\'' +
                 ", infoMoney=" + infoMoney +
                 ", infoImg='" + infoImg + '\'' +
-                ", infoRapType=" + infoRapType +
+                ", infoPayType=" + infoPayType +
                 ", infoDate=" + infoDate +
                 ", infoRemark='" + infoRemark + '\'' +
                 ", createDate=" + createDate +

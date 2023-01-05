@@ -29,5 +29,10 @@ public class BillTypeController {
         return typeService.queryType(type);
     }
 
+    @RequestMapping("removeBillType")
+    public R removeBillType (@RequestBody BillType billType) {
+        return typeService.removeType(billType);
+    }
+
 
 }
