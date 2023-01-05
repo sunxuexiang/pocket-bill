@@ -10,7 +10,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-//        Integer currentLoginUser = JwtUtils.getCurrentLoginUser();
+//        Integer currentLoginUser = JwtUtils.LoginUser();
 //        if (currentLoginUser == 0) {
 //            return false;
 //        }

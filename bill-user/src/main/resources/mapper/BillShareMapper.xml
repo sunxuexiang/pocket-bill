@@ -11,9 +11,30 @@
         </collection>
     </resultMap>
 
-    <select id="queryByBillAndUserId" resultMap="billAndUserDao" parameterType="java.lang.Integer">
-        select * from bill_user user inner join bill_share share on user_id = share.share_user_id
-        where share.share_id = #{billBookId}
+    <select id="queryUserByBookId" resultType="java.util.Map">
+
+        select bu.user_id userId,
+               bu.user_name userName,
+               bu.user_img userImg,
+               t.bookId t.bookId,
+               t.sharePower sharePower
+        from bill_user bu
+        inner join
+        (select value(0) as shareId,
+                book_id bookId,
+                user_id userId,
+                value(1) as sharePower
+        from bill_book bb
+        where bb.book_id=#{bookId}
+        union all
+        select bs.share_id shareId,
+               bs.share_book_id bookId,
+               bs.share_user_id userId,
+               bs.share_power as sharePower
+        from bill_share bs
+        where bs.share_book_id=#{bookId}) t
+        on(bu.user_id=t.userId)
+
     </select>
     
     <select id="queryBillByUserId" resultType="java.util.List" parameterType="java.lang.Integer">
@@ -36,4 +57,11 @@
         where bs.book_id=#{bookId,jdbcType=NUMERIC}
     </select>
 
+    <update id="updateUserBillPermession">
+        update bill_share bs
+        set bs.share_power=#{sharePower,jdbcType=INTEGER},
+            bs.update_by=#{currentUser,jdbcType=INTEGER},
+            bs.update_time=now()
+        where bs.share_id=#{shareId,jdbcType=NUMERIC}
+    </update>
 </mapper>

@@ -6,17 +6,20 @@ import com.cloudfly.start.bill.entity.BillShare;
 import com.cloudfly.start.bill.utils.R;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BillShareService extends IService<BillShare>{
 
-    R queryByBillAndUserId(Integer billId);
+    List<Map<String,String>> queryUserByBookId(Integer bookId);
 
-    R addShare(BillShare billShare);
+    void addShare(BillShare billShare);
 
-    R updateShareByBill(BillShare list);
+    void updateUserBillPermession(Integer shareId,Integer sharePower);
+
+    void deleteUserBillPermission(Integer shareId);
 
     BillBook queryBillByBookIdAndUserId(Integer bookId);
 
-    void updateShareBillBatch(Integer bookId);
+    void updateShareBillBatch(Integer bookId,Integer sharePower);
 
 }

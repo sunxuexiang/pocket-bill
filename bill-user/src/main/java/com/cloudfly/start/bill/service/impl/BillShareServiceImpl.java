@@ -11,38 +11,40 @@ import com.cloudfly.start.bill.utils.R;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Service("billShareService")
 public class BillShareServiceImpl extends ServiceImpl<BillShareMapper,BillShare> implements BillShareService{
-
-    @Autowired
-    private BillManageServiceImpl billManageService;
 
     @Autowired
     private BillShareMapper billShareMapper;
 
     @Override
-    public R queryByBillAndUserId(Integer billId) {
-        BillBook byId = billManageService.getById(billId);
-        BillAndUser billAndUserDao = baseMapper.queryByBillAndUserId(billId);
-        billAndUserDao.setBillBook(byId);
-        return R.ok(billAndUserDao);
+    public List<Map<String,String>> queryUserByBookId(Integer bookId) {
+        return billShareMapper.queryUserByBookId(bookId);
     }
 
     @Override
-    public R addShare(BillShare billShare) {
+    public void addShare(BillShare billShare) {
         billShare.setShareUserId(JwtUtils.getCurrentLoginUser());
-        if (baseMapper.insert(billShare) > 0) {
-            return R.ok("添加成功");
-        }
-        return R.error();
+        baseMapper.insert(billShare);
+
     }
 
     @Override
-    public R updateShareByBill(BillShare share) {
-        if (baseMapper.updateById(share) > 0) {
-            return R.ok("添加成功");
-        }
-        return R.error();
+    public void updateUserBillPermession(Integer shareId,Integer sharePower) {
+        billShareMapper.updateUserBillPermession(shareId, sharePower,JwtUtils.getCurrentLoginUser());
+    }
+
+    /**
+     * @param shareId
+     */
+    @Override
+    public void deleteUserBillPermission(Integer shareId) {
+        billShareMapper.deleteById(shareId);
     }
 
     /**
@@ -58,7 +60,8 @@ public class BillShareServiceImpl extends ServiceImpl<BillShareMapper,BillShare>
      * @param bookId
      */
     @Override
-    public void updateShareBillBatch(Integer bookId) {
-        billShareMapper.updateShareBillBatch(bookId);
+    public void updateShareBillBatch(Integer bookId,Integer sharePower) {
+        billShareMapper.updateShareBillBatch(bookId, sharePower);
     }
+
 }

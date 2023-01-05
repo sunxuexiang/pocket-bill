@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/bill-share")
 public class BillShareController {
@@ -29,19 +34,45 @@ public class BillShareController {
     * @author: Hulk
     * @date : 2022/12/4 19:58
     */
-   @RequestMapping("/queryByBillAndUserId")
-   public R queryByBillAndUserId(Integer billId){
-        return billShareService.queryByBillAndUserId(billId);
+   @RequestMapping("/queryUserByBookId")
+   public R queryUserByBookId(@RequestParam("bookId") Integer bookId){
+//       select user_id userId,
+//               user_name userName,
+//               user_img userImg,
+//               t.book_id t.bookId,
+//               t.is_admin isAdmin
+       List<Map<String,String>> result=new ArrayList<>();
+       for(int i=0;i<4;i++){
+           Map<String,String> map=new HashMap<>();
+           map.put("userId",(i+1)+"");
+           map.put("userName","老六");
+           map.put("userImg","老六");
+           map.put("bookId",(i+1)+"");
+
+           if(i==0){
+               map.put("sharePower","0");
+           }else{
+               map.put("sharePower","1");
+           }
+           if(i==2){
+               map.put("sharePower","2");
+           }
+           result.add(map);
+       }
+
+
+       return R.ok().put(CommonContant.RESPONSE_FIELD,result);
    }
 
-   /**
-   * @Description : 账单共享页面添加其他共享人
-   * @author: Hulk
-   * @date : 2022/12/4 19:59
-   */
-   @RequestMapping("/addShare")
+    /**
+    * @Description : 账单共享页面添加其他共享人
+    * @author: Hulk
+    * @date : 2022/12/4 19:59
+    */
+    @RequestMapping("/addShare")
     public R addShare(BillShare billShare) {
-        return billShareService.addShare(billShare);
+        billShareService.addShare(billShare);
+        return R.ok();
     }
 
     /**
@@ -49,16 +80,24 @@ public class BillShareController {
     * @author: Hulk
     * @date : 2022/12/4 20:00
     */
-    @RequestMapping("/updateShareByBill")
-    public R updateShareByBill(BillShare list) {
-        return billShareService.updateShareByBill(list);
+    @RequestMapping("/updateUserBillPermession")
+    public R updateUserBillPermession(@RequestParam("shareId") Integer shareId, @RequestParam("sharePower") Integer sharePower) {
+        logger.info("updateUserBillPermession start with shareId:[{}],userId:[{}],sharePower:[{}]",
+                shareId, sharePower);
+        billShareService.updateUserBillPermession(shareId,sharePower);
+        return R.ok();
+    }
+
+    public R deleteUserBillPermission(@RequestParam("shareId") Integer shareId){
+        billShareService.deleteUserBillPermission(shareId);
+        return R.ok();
     }
 
     public R updateShareBillBatch(@RequestParam("bookId")Integer bookId,@RequestParam("sharePower") Integer sharePower){
-       logger.info("updateShareBillBatch start with bookId:[{}],sharePower:[{}]",bookId,sharePower);
+        logger.info("updateShareBillBatch start with bookId:[{}],sharePower:[{}]",bookId,sharePower);
         BillBook bb= billShareService.queryBillByBookIdAndUserId(bookId);
         if(null!=bb){
-            billShareService.updateShareBillBatch(bookId);
+            billShareService.updateShareBillBatch(bookId,sharePower);
             return R.ok();
         }else{
             logger.info("current user don't has permession to operate this book with id:[{}]",bookId);
