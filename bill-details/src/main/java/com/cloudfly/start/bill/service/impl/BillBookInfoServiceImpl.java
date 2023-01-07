@@ -69,8 +69,9 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
                                                         BigDecimal startMoney, BigDecimal endMoney,String userName) {
         List<BillBookInfo> billBookInfos=billBookInfoMapper.queryBillDetailsCustomize(bookId,infoRemark,startTime,
                 endTime, startMoney, endMoney,userName);
-        BigDecimal monthIn = new BigDecimal(0).setScale(2, RoundingMode.HALF_UP);
-        BigDecimal monthOut = new BigDecimal(0).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal totalIn = new BigDecimal(0).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal totalOut = new BigDecimal(0).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal balance = new BigDecimal(0).setScale(2, RoundingMode.HALF_UP);
         Map<String,Object> details=new HashMap<>();
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         List<Map<String,Object>> detailsList=new ArrayList<>();
@@ -81,9 +82,9 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
             String bbisDay=sdf.format(bbis.getInfoDate());
             String bbidDay=sdf.format(bbid.getInfoDate());
             if(bbis.getInfoPayType()==1){
-                monthIn=monthIn.add(bbis.getInfoMoney());
+                totalIn=totalIn.add(bbis.getInfoMoney());
             }else{
-                monthOut=monthOut.add(bbis.getInfoMoney());
+                totalOut=totalOut.add(bbis.getInfoMoney());
             }
             if(details.get("dayIn") == null || details.get("dayOut") == null){
                 details.put("dayIn",new BigDecimal(0));
@@ -103,9 +104,9 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
             }
             if(i==billBookInfos.size()-2){
                 if(bbis.getInfoPayType()==1){
-                    monthIn=monthIn.add(bbis.getInfoMoney());
+                    totalIn=totalIn.add(bbis.getInfoMoney());
                 }else{
-                    monthOut=monthOut.add(bbis.getInfoMoney());
+                    totalOut=totalOut.add(bbis.getInfoMoney());
                 }
                 if(StringUtils.isNotEmpty(bbisDay)&&bbisDay.equals(bbidDay)){
                     concatDayInOrOut(bbid,details);
@@ -121,8 +122,9 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
             }
         }
         Map<String,Object> result=new HashMap<>();
-        result.put("monthIn", monthIn);
-        result.put("monthOut", monthOut);
+        result.put("totalIn", totalIn);
+        result.put("totalOut", totalOut);
+        result.put("totalOut", totalIn.subtract(totalOut));
         result.put(CommonContant.DATA_FIELD,detailsList);
         return result;
     }
