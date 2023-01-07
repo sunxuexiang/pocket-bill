@@ -17,6 +17,8 @@ public class BillUser {
     private String userSex;
     private Integer userIntegral;
     private Integer userInvitation;
+    private Integer billCount;
+    private Integer billDay;
     @TableField(fill = FieldFill.INSERT)
     private Date createDate;
     @TableField(fill = FieldFill.INSERT)
@@ -112,6 +114,22 @@ public class BillUser {
 
     public void setUserOpenid(String userOpenid) {
         this.userOpenid = userOpenid;
+    }
+
+    public Integer getBillCount() {
+        return billCount;
+    }
+
+    public void setBillCount(Integer billCount) {
+        this.billCount = billCount;
+    }
+
+    public Integer getBillDay() {
+        return billDay;
+    }
+
+    public void setBillDay(Integer billDay) {
+        this.billDay = billDay;
     }
 
     @Override

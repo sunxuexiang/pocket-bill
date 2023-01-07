@@ -4,9 +4,12 @@ package com.cloudfly.start.bill.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloudfly.start.bill.contants.CommonContant;
 import com.cloudfly.start.bill.entity.BillBookInfo;
+import com.cloudfly.start.bill.entity.BillUser;
 import com.cloudfly.start.bill.mapper.BillBookInfoMapper;
+import com.cloudfly.start.bill.remoteapi.UserFeignService;
 import com.cloudfly.start.bill.service.BillBookInfoService;
 import com.cloudfly.start.bill.utils.JwtUtils;
+import com.cloudfly.start.bill.utils.R;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,13 +27,25 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
     @Autowired
     private BillBookInfoMapper billBookInfoMapper;
 
+    @Autowired
+    private UserFeignService userFeignService;
+
     /**
      * @param billBookInfo
      */
     @Override
     public void addBookInfo(BillBookInfo billBookInfo) {
         billBookInfo.setUserId(JwtUtils.getCurrentLoginUser());
-        this.save(billBookInfo);
+        if (this.save(billBookInfo)) {
+            // 修改记账次数和记账天数
+            BillUser billUser = userFeignService.queryUser();
+            billUser.setBillCount(billUser.getBillCount()==null?1:billUser.getBillCount()+1);
+            int i = billBookInfoMapper.queryCurrentData();
+            if (i == 0) {
+                billUser.setBillDay(billUser.getBillDay()==null?1:billUser.getBillDay()+1);
+            }
+            userFeignService.addUser(billUser);
+        }
     }
 
     /**

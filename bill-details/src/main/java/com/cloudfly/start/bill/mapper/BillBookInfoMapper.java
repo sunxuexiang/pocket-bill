@@ -15,4 +15,6 @@ public interface BillBookInfoMapper extends BaseMapper<BillBookInfo> {
                                                  @Param("startTime") Date startTime, @Param("endTime")Date endTime,
                                                  @Param("startMoney") BigDecimal startMoney, @Param("endMoney")BigDecimal endMoney,
                                                  @Param("userName")String userName);
+
+    int queryCurrentData () ;
 }

@@ -23,6 +23,7 @@ public class BillTypeServiceImpl extends ServiceImpl<BillTypeMapper,BillType> im
 
     @Override
     public R addType(BillType billType) {
+        billType.setUserId(JwtUtils.getCurrentLoginUser());
         int insert = baseMapper.insert(billType);
         if (insert >=1 )
             return R.ok();
@@ -58,5 +59,17 @@ public class BillTypeServiceImpl extends ServiceImpl<BillTypeMapper,BillType> im
             }
         }
         return R.error();
+    }
+
+    @Override
+    public R querySystemIcon(int parentId) {
+
+        List<BillType> billTypes = null;
+        if (parentId == 0) {
+            billTypes = baseMapper.selectList(new LambdaQueryWrapper<BillType>().eq(BillType::getUserId, 8888).eq(BillType::getParentId,parentId));
+        } else {
+            billTypes = baseMapper.selectList(new LambdaQueryWrapper<BillType>().eq(BillType::getUserId, 8888).ne(BillType::getParentId,0));
+        }
+        return R.ok(billTypes);
     }
 }

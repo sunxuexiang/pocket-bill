@@ -2,6 +2,7 @@ package com.cloudfly.start.bill.controller;
 
 import com.cloudfly.start.bill.entity.BillUser;
 import com.cloudfly.start.bill.service.BillUserService;
+import com.cloudfly.start.bill.utils.JwtUtils;
 import com.cloudfly.start.bill.utils.R;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,11 @@ public class LoginController {
     @RequestMapping("/login")
     public R login(@Param("code") String code) throws Exception{
         return billUserService.Login(code);
+    }
+
+    @RequestMapping("/feignQueryUser")
+    public BillUser feignQueryUser () {
+        return billUserService.getById(JwtUtils.getCurrentLoginUser());
     }
 
     @RequestMapping("/addUser")

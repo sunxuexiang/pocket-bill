@@ -1,6 +1,5 @@
 package com.cloudfly.start.bill;
 
-import com.alibaba.nacos.shaded.org.checkerframework.checker.units.qual.C;
 import com.cloudfly.start.bill.controller.BillBookAnnualSummaryController;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;

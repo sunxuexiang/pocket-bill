@@ -34,5 +34,9 @@ public class BillTypeController {
         return typeService.removeType(billType);
     }
 
+    @RequestMapping("querySystemIcon")
+    public R querySystemIcon(@Param("parentId") int parentId) {
+        return typeService.querySystemIcon(parentId);
+    }
 
 }

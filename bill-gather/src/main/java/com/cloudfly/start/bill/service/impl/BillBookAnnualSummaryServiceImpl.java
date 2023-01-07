@@ -32,11 +32,11 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
         BigDecimal yearTotalOut=new BigDecimal(0);
         int[] array=new int [13];
         for(Map<String,BigDecimal> map:resultList){
-            if (map.get("monthIn") == null) {
+            if (map.get("monthIn") != null) {
                 BigDecimal monthIn=map.get("monthIn").setScale(2, RoundingMode.HALF_UP);
                 yearTotalIn=yearTotalIn.add(monthIn);
             }
-            if (map.get("monthOUt") != null) {
+            if (map.get("monthOut") != null) {
                 yearTotalOut=yearTotalOut.add(map.get("monthOut").setScale(2, RoundingMode.HALF_UP));
             }
             String billMonth=String.valueOf(map.get("billMonth"));

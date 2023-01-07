@@ -21,6 +21,6 @@
                 bt1.user_id = #{userId} and bt1.is_delete = 1 and bt1.type = #{type})
 
             AND bt.is_delete = 0
-            AND bt.type = #{type} and bt.user_id = 9999
+            AND bt.type = #{type} and (bt.user_id = 9999 or bt.user_id = #{userId})
    </select>
 </mapper>

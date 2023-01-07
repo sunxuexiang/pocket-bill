@@ -43,4 +43,8 @@
         </if>
         order by bbi.info_date desc
     </select>
+
+    <select id="queryCurrentData" resultType="int">
+        select count(1) from bill_book_info where create_date BETWEEN CONCAT(CURDATE(),' 00:00:00') AND CONCAT(CURDATE(),' 23:59:59');
+    </select>
 </mapper>
