@@ -14,8 +14,8 @@
             select t.book_id bookId,
                    t.bill_month billMonth,
                    t.info_pay_type infoPayType,
-                   (case when t.info_pay_type=1 then sum(t.info_money) else null end) monthIn,
-                   (case when t.info_pay_type=2 then sum(t.info_money) else null end) monthOut
+                   (case when t.info_pay_type=1 then sum(t.info_money) else 0.00 end) monthIn,
+                   (case when t.info_pay_type=2 then sum(t.info_money) else 0.00 end) monthOut
             from (
                 select bbi.book_id,
                        bbi.info_money,
