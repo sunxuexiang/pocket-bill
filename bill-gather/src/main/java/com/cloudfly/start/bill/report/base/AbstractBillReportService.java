@@ -14,13 +14,13 @@ public abstract class AbstractBillReportService implements BaseBillReportService
     @Autowired
     private BillBookReportGatherMapper billReportMapper;
 
-    private String infoPayType;
+    private Integer infoPayType;
 
     private int year;
 
     private int month;
 
-    public String getInfoPayType() {
+    public Integer getInfoPayType() {
         return infoPayType;
     }
 
@@ -40,17 +40,17 @@ public abstract class AbstractBillReportService implements BaseBillReportService
         this.month = month;
     }
 
-    public void setReportBaseData(String reportType,int year,int month) {
+    public void setReportBaseData(Integer infoPayType,int year,int month) {
         this.infoPayType=infoPayType;
         this.year=year;
         this.month=month;
     }
 
-    public List<BillBookInfo> generateReport(String infoPayType,int year,int month){
+    public List<BillBookInfo> generateReport(Integer bookId,Integer infoPayType,int year,int month){
         this.setReportBaseData(infoPayType,year,month);
         Date startTime=countQueryStartTime();
         Date endTime=countQueryEndTime();
-        return billReportMapper.generateReport(startTime,endTime,infoPayType);
+        return billReportMapper.generateReport(bookId,startTime,endTime,infoPayType);
     }
     /**
      * @Description: 计算报表查询开始时间

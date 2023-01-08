@@ -40,12 +40,12 @@ public class BillBookReportGatherController {
      * @return R
      */
     @RequestMapping("/queryReporyByYear")
-    public R queryReporyByYear(@RequestParam("bookId") Integer bookId, @RequestParam("infoPayType") String infoPayType,
+    public R queryReporyByYear(@RequestParam("bookId") Integer bookId, @RequestParam("infoPayType") Integer infoPayType,
                                @RequestParam("year") int year){
         logger.info(" queryReporyByYear start with bookId:[{}],infoPayType:[{}],year:[{}]",bookId,infoPayType,year);
 
         try {
-            return R.ok().put(CommonContant.RESPONSE_FIELD,yearBillReportService.generateReport(infoPayType,year,0));
+            return R.ok().put(CommonContant.RESPONSE_FIELD,yearBillReportService.generateReport(bookId,infoPayType,year,0));
         }catch(Exception e){
             logger.error("queryReporyByYear occured exception : {}", ExceptionUtils.getStackTrace(e));
             throw new BillSystemException(e.getMessage());
@@ -59,11 +59,11 @@ public class BillBookReportGatherController {
      * @return R
      */
     @RequestMapping("/queryReporyByMonth")
-    public R queryReporyByMonth(@RequestParam("bookId") Integer bookId, @RequestParam("infoPayType") String infoPayType,
+    public R queryReporyByMonth(@RequestParam("bookId") Integer bookId, @RequestParam("infoPayType") Integer infoPayType,
                                 @RequestParam("year") int year, @RequestParam("month") int month){
         logger.info(" queryReporyByMonth start with bookId={},infoPayType={}",bookId,infoPayType);
         try {
-            return R.ok().put(CommonContant.RESPONSE_FIELD,monthBillReportService.generateReport(infoPayType,year,month));
+            return R.ok().put(CommonContant.RESPONSE_FIELD,monthBillReportService.generateReport(bookId,infoPayType,year,month));
         }catch(Exception e){
             logger.error("queryReporyByMonth occured exception : {}", ExceptionUtils.getStackTrace(e));
             throw new BillSystemException(e.getMessage());
@@ -78,9 +78,8 @@ public class BillBookReportGatherController {
      */
     @RequestMapping("/queryReporyByWeek")
     public R queryReporyByWeek(@RequestParam("bookId") Integer bookId,
-                               @RequestParam("infoPayType") String infoPayType){
+                               @RequestParam("infoPayType") Integer infoPayType){
         logger.info(" queryReporyByWeek start with bookId={},infoPayType={}",bookId,infoPayType);
-
-        return R.ok().put(CommonContant.RESPONSE_FIELD,weekBillReportService.generateReport(infoPayType,0,0));
+        return R.ok().put(CommonContant.RESPONSE_FIELD,weekBillReportService.generateReport(bookId,infoPayType,0,0));
     }
 }
