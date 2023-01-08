@@ -7,7 +7,8 @@
     <select id="generateReport" resultType="com.cloudfly.start.bill.entity.BillBookInfo">
         select bbi.book_id bookId,
                bbi.info_money infoMoney,
-               bbi.info_pay_type infoPayType
+               bbi.info_pay_type infoPayType,
+               bbi.info_date infoDate
         from bill_book_info bbi inner join bill_user bu
              on(bbi.user_id = bu.user_id)
         where bbi.book_id = #{bookId,jdbcType=INTEGER}

@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -269,6 +271,14 @@ public class DateUtil {
     //此方法可能没什么用
     public static Timestamp getTimestamp(Date date) {
         return new java.sql.Timestamp(date.getTime());
+    }
+
+    //获取当前日期月份
+    public static String getCurrentMonth(Date date){
+        Calendar now = Calendar.getInstance();
+        now.setTime(date);
+        int month = now.get(Calendar.MONTH) + 1;
+        return month>9?String.valueOf(month):"0"+month;
     }
 }
 
