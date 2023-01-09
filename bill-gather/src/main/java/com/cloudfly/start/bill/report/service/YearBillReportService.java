@@ -6,6 +6,7 @@ import com.cloudfly.start.bill.utils.DateUtil;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 
@@ -37,7 +38,7 @@ public class YearBillReportService extends AbstractBillReportService {
     public Map<String,Object> generateReportBySelf(List<BillBookInfo> reportList) {
         Map<String,Object> resultMap=billDataClassifyByDate(reportList,new int[13]);
         BigDecimal total=(BigDecimal) resultMap.get("total");
-        BigDecimal average=total.divide(new BigDecimal(12));
+        BigDecimal average=total.divide(new BigDecimal(12)).setScale(2, RoundingMode.HALF_UP);
         resultMap.put("average",average);
         return resultMap;
     }

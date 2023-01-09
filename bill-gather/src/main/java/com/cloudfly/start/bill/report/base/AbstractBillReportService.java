@@ -95,14 +95,16 @@ public abstract class AbstractBillReportService implements BaseBillReportService
             Date infoDate=billBookInfo.getInfoDate();
             String date=getMonthOrDayOrWeek(infoDate);
             BigDecimal infoMoney=billBookInfo.getInfoMoney();
-            total=total.add(total);
+            total=total.add(infoMoney);
             if(classifyMap.get(date)!=null){
                 classifyMap.put(date,classifyMap.get(date).add(infoMoney));
             }else{
                 classifyMap.put(date,billBookInfo.getInfoMoney());
             }
+            //排除已经统计过的时间
             array[Integer.parseInt(date)]=1;
         }
+        total=total.setScale(2, RoundingMode.HALF_UP);
         //其余没有数据的时间统一设置0
         for(int i=1;i<array.length;i++){
             if(array[i]==0) {
