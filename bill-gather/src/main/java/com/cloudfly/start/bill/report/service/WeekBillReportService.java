@@ -37,7 +37,7 @@ public class WeekBillReportService extends AbstractBillReportService {
     public Map<String,Object> generateReportBySelf(List<BillBookInfo> reportList) {
         Map<String,Object> resultMap=billDataClassifyByDate(reportList,new int[32]);
         BigDecimal total=(BigDecimal) resultMap.get("total");
-        BigDecimal average=total.divide(new BigDecimal(7)).setScale(2, RoundingMode.HALF_UP);
+        BigDecimal average=total.divide(new BigDecimal(7),2, RoundingMode.HALF_UP);
         resultMap.put("average",average);
         return resultMap;
     }

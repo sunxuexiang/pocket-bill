@@ -41,8 +41,8 @@ public class MonthBillReportService extends AbstractBillReportService {
     public Map<String,Object> generateReportBySelf(List<BillBookInfo> reportList) {
         Map<String,Object> resultMap=billDataClassifyByDate(reportList,new int[32]);
         BigDecimal total=(BigDecimal) resultMap.get("total");
-        Integer subtractDay=DateUtil.getSubtractDay(countQueryEndTime(),countQueryStartTime());
-        BigDecimal average=total.divide(new BigDecimal(subtractDay)).setScale(2, RoundingMode.HALF_UP);
+        Integer dividetDay=Integer.parseInt(DateUtil.getCurrentDay(countQueryEndTime()));
+        BigDecimal average=total.divide(new BigDecimal(dividetDay),2, RoundingMode.HALF_UP);
         resultMap.put("average",average);
         return resultMap;
     }

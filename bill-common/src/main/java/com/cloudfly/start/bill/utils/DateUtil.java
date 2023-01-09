@@ -271,18 +271,6 @@ public class DateUtil {
         int day = now.get(Calendar.DAY_OF_MONTH);
         return day>9?String.valueOf(day):"0"+day;
     }
-
-    //计算两个日期相差天数
-    public static Integer getSubtractDay(Date preDate,Date nextDate){
-        Calendar cal1 = Calendar.getInstance();
-        cal1.setTime(preDate);
-
-        Calendar cal2 = Calendar.getInstance();
-        cal2.setTime(nextDate);
-        int preDay= cal1.get(Calendar.DAY_OF_YEAR);
-        int nextDay = cal2.get(Calendar.DAY_OF_YEAR);
-        return nextDay-preDay;
-    }
 }
 
 
