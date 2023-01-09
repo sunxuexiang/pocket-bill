@@ -43,7 +43,7 @@ public class BillBookReportGatherController {
     public R queryReporyByYear(@RequestParam("bookId") Integer bookId, @RequestParam("infoPayType") Integer infoPayType,
                                @RequestParam("year") int year){
         logger.info(" queryReporyByYear start with bookId:[{}],infoPayType:[{}],year:[{}]",bookId,infoPayType,year);
-        return R.ok().put(CommonContant.RESPONSE_FIELD,yearBillReportService.queryReportList(bookId,infoPayType,year,0));
+        return R.ok().put(CommonContant.RESPONSE_FIELD,yearBillReportService.generateReport(bookId,infoPayType,year,0));
 
     }
 
@@ -57,7 +57,7 @@ public class BillBookReportGatherController {
     public R queryReporyByMonth(@RequestParam("bookId") Integer bookId, @RequestParam("infoPayType") Integer infoPayType,
                                 @RequestParam("year") int year, @RequestParam("month") int month){
         logger.info(" queryReporyByMonth start with bookId={},infoPayType={}",bookId,infoPayType);
-        return R.ok().put(CommonContant.RESPONSE_FIELD,monthBillReportService.queryReportList(bookId,infoPayType,year,month));
+        return R.ok().put(CommonContant.RESPONSE_FIELD,monthBillReportService.generateReport(bookId,infoPayType,year,month));
     }
 
     /**
@@ -70,6 +70,6 @@ public class BillBookReportGatherController {
     public R queryReporyByWeek(@RequestParam("bookId") Integer bookId,
                                @RequestParam("infoPayType") Integer infoPayType){
         logger.info(" queryReporyByWeek start with bookId={},infoPayType={}",bookId,infoPayType);
-        return R.ok().put(CommonContant.RESPONSE_FIELD,weekBillReportService.queryReportList(bookId,infoPayType,0,0));
+        return R.ok().put(CommonContant.RESPONSE_FIELD,weekBillReportService.generateReport(bookId,infoPayType,0,0));
     }
 }

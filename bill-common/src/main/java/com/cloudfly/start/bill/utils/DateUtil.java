@@ -147,18 +147,15 @@ public class DateUtil {
     }
 
 
-    public static String getAfterDay(String date,int num ){
+    public static String getAfterDay(String date,int num ) throws ParseException {
         //用给定的模式和默认语言环境的日期格式符号构造 SimpleDateFormat。
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd ");
 
         Date dt=null;
-        try{
-            //解析字符串的文本，生成 Date
-            dt=sdf.parse(date);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
+
+        //解析字符串的文本，生成 Date
+        dt=sdf.parse(date);
+
         //使用默认时区和语言环境获得一个日历。
         Calendar calendar=Calendar.getInstance();
         //使用给定的 Date 设置此 Calendar 的时间。
@@ -207,37 +204,23 @@ public class DateUtil {
 
     }
     //字符串转换成日期时间，不精确到时分秒
-    public static Date getStringToDate(String day){
+    public static Date getStringToDate(String day) throws ParseException {
         //用给定的模式和默认语言环境的日期格式符号构造 SimpleDateFormat
         SimpleDateFormat sdf2=new SimpleDateFormat("yyyy-MM-dd");
         Date dt = new Date();
-        try{
-
-            dt=sdf2.parse(day);
-
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-
+        dt=sdf2.parse(day);
         // return new java.sql.Date(dt.getTime());
         return dt;
     }
 
 
     //字符串转换成日期时间，精确到时分秒
-    public static Date getStringToDateTime(String day){
+    public static Date getStringToDateTime(String day) throws ParseException {
         //用给定的模式和默认语言环境的日期格式符号构造 SimpleDateFormat。
         SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//HH是24小时制，hh是12小时制
         Date dt = new Date();
-        try{
-
-            dt=sdf1.parse(day);
-        }
-        catch(Exception e){
-            e.printStackTrace();
-        }
-        // return dt;
+        dt=sdf1.parse(day);
+        //return dt;
         return new java.sql.Date(dt.getTime());
 
     }
@@ -279,6 +262,26 @@ public class DateUtil {
         now.setTime(date);
         int month = now.get(Calendar.MONTH) + 1;
         return month>9?String.valueOf(month):"0"+month;
+    }
+
+    //获取当前日期天数
+    public static String getCurrentDay(Date date){
+        Calendar now = Calendar.getInstance();
+        now.setTime(date);
+        int day = now.get(Calendar.DAY_OF_MONTH);
+        return day>9?String.valueOf(day):"0"+day;
+    }
+
+    //计算两个日期相差天数
+    public static Integer getSubtractDay(Date preDate,Date nextDate){
+        Calendar cal1 = Calendar.getInstance();
+        cal1.setTime(preDate);
+
+        Calendar cal2 = Calendar.getInstance();
+        cal2.setTime(nextDate);
+        int preDay= cal1.get(Calendar.DAY_OF_YEAR);
+        int nextDay = cal2.get(Calendar.DAY_OF_YEAR);
+        return nextDay-preDay;
     }
 }
 

@@ -33,8 +33,21 @@ public class WeekBillReportService extends AbstractBillReportService {
      * @return
      */
     @Override
-    public List<Map<String,Object>> generateReport(List<BillBookInfo> reportList) {
-        return null;
+    public Map<String,Object> generateReportBySelf(List<BillBookInfo> reportList) {
+        Map<String,Object> resultMap=billDataClassifyByDate(reportList,new int[32]);
+        BigDecimal total=(BigDecimal) resultMap.get("total");
+        BigDecimal average=total.divide(new BigDecimal(7));
+        resultMap.put("average",average);
+        return resultMap;
+    }
+
+    /**
+     * @param date
+     * @return
+     */
+    @Override
+    public String getMonthOrDayOrWeek(Date date) {
+        return DateUtil.getCurrentDay(date);
     }
 
 }

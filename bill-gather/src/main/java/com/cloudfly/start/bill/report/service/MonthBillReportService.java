@@ -37,9 +37,22 @@ public class MonthBillReportService extends AbstractBillReportService {
      * @return Object
      */
     @Override
-    public List<Map<String,Object>> generateReport(List<BillBookInfo> reportList) {
+    public Map<String,Object> generateReportBySelf(List<BillBookInfo> reportList) {
+        Map<String,Object> resultMap=billDataClassifyByDate(reportList,new int[32]);
+        BigDecimal total=(BigDecimal) resultMap.get("total");
+        Integer subtractDay=DateUtil.getSubtractDay(countQueryEndTime(),countQueryStartTime());
+        BigDecimal average=total.divide(new BigDecimal(subtractDay));
+        resultMap.put("average",average);
+        return resultMap;
+    }
 
-        return null;
+    /**
+     * @param date
+     * @return
+     */
+    @Override
+    public String getMonthOrDayOrWeek(Date date) {
+        return DateUtil.getCurrentDay(date);
     }
 
 }
