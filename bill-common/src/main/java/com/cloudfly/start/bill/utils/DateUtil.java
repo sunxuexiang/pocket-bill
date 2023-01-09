@@ -131,8 +131,24 @@ public class DateUtil {
         Calendar calendar=Calendar.getInstance();
         calendar.add(Calendar.WEEK_OF_MONTH, 0);
         calendar.set(Calendar.DAY_OF_WEEK, 2);
-        return calendar.getTime();
 
+        SimpleDateFormat format = new SimpleDateFormat(DATE_TIME_PATTERN);
+        int year = calendar.get(Calendar.YEAR);
+        //获取月份，0表示1月份
+        int month = calendar.get(Calendar.MONTH) + 1;
+        //获取本周第一天
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        try {
+            return format.parse(year+"-"+month+"-"+day + " 00:00:00");
+        } catch (ParseException e) {
+            logger.error("getMonthLastDay occur exception");
+            throw new BillSystemException(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getWeekFirstDay());
+        System.out.println(getWeekLastDay());
     }
 
     /**
@@ -143,7 +159,18 @@ public class DateUtil {
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.DAY_OF_WEEK, calendar.getActualMaximum(Calendar.DAY_OF_WEEK));
         calendar.add(Calendar.DAY_OF_WEEK, 1);
-        return calendar.getTime();
+        SimpleDateFormat format = new SimpleDateFormat(DATE_TIME_PATTERN);
+        int year = calendar.get(Calendar.YEAR);
+        //获取月份，0表示1月份
+        int month = calendar.get(Calendar.MONTH) + 1;
+        //获取本周最后一天
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        try {
+            return format.parse(year+"-"+month+"-"+day + " 23:59:59");
+        } catch (ParseException e) {
+            logger.error("getMonthLastDay occur exception");
+            throw new BillSystemException(e.getMessage());
+        }
     }
 
 
