@@ -91,31 +91,40 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
             detailsList.add(details);
         }else{
             for(int i=0;i<billBookInfos.size()-1;i++){
+                //取上一条数据
                 BillBookInfoEntity bbis=billBookInfos.get(i);
+                //取下一条数据
                 BillBookInfoEntity bbid=billBookInfos.get(i+1);
                 String bbisDay=sdf.format(bbis.getInfoDate());
                 String bbidDay=sdf.format(bbid.getInfoDate());
+                //计算当前总收入或指出
                 if(bbis.getInfoPayType()==1){
                     totalIn=totalIn.add(bbis.getInfoMoney());
                 }else{
                     totalOut=totalOut.add(bbis.getInfoMoney());
                 }
+                //初始化dayIn和dayOut 避免后续计算没有初始化报错
                 if(details.get("dayIn") == null || details.get("dayOut") == null){
                     details.put("dayIn",new BigDecimal(0));
                     details.put("dayOut",new BigDecimal(0));
                 }
+
                 if(StringUtils.isNotEmpty(bbisDay)&&bbisDay.equals(bbidDay)){
+                    //如果上一条和下一条相等 直接计算dayIn或者dayOut
                     concatDayInOrOut(bbis,details);
                     bbiList.add(bbis);
                 }else{
+                    //如果不相等，则直接将上一条数据汇
                     concatDayInOrOut(bbis,details);
                     bbiList.add(bbis);
                     details.put("infoDate",bbis.getInfoDate());
                     details.put("bookInfos",bbiList);
                     detailsList.add(details);
+                    //重新初始化存储数据的对象
                     bbiList=new ArrayList<>();
                     details=new HashMap<>();
                 }
+                //处理最后一条数据
                 if(i==billBookInfos.size()-2){
                     if(bbid.getInfoPayType()==1){
                         totalIn=totalIn.add(bbid.getInfoMoney());
@@ -125,6 +134,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
                     if(StringUtils.isNotEmpty(bbisDay)&&bbisDay.equals(bbidDay)){
                         concatDayInOrOut(bbid,details);
                     }else{
+                        //如果最后一条数据和前一条不相等 就重新生成一条信数据包含列表
                         details.put("dayIn",new BigDecimal(0));
                         details.put("dayOut",new BigDecimal(0));
                         concatDayInOrOut(bbid,details);
