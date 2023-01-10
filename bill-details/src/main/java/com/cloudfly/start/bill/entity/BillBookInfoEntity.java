@@ -1,4 +1,4 @@
-package com.cloudfly.start.bill.dao;
+package com.cloudfly.start.bill.entity;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.Date;
  * @author: Hulk
  * @date : 1016:37
  */
-public class BillBookInfoDao {
+public class BillBookInfoEntity {
     private static final long serialVersionUID = 1L;
 
     private Integer infoId;

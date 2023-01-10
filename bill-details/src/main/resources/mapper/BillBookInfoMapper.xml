@@ -12,7 +12,7 @@
 
 
 
-    <select id="queryBillDetailsCustomize" resultType="com.cloudfly.start.bill.dao.BillBookInfoDao">
+    <select id="queryBillDetailsCustomize" resultType="com.cloudfly.start.bill.entity.BillBookInfoEntity">
         select bbi.info_id infoId,
                bbi.book_id bookId,
                bbi.user_id userId,
