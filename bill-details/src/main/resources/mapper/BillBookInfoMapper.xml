@@ -12,7 +12,7 @@
 
 
 
-    <select id="queryBillDetailsCustomize" resultType="com.cloudfly.start.bill.entity.BillBookInfo">
+    <select id="queryBillDetailsCustomize" resultType="com.cloudfly.start.bill.dao.BillBookInfoDao">
         select bbi.info_id infoId,
                bbi.book_id bookId,
                bbi.user_id userId,
@@ -20,8 +20,12 @@
                bbi.type_id typeId,
                bbi.info_money infoMoney,
                bbi.info_pay_type infoPayType,
-               bbi.info_date infoDate
+               bbi.info_date infoDate,
+               bbi.info_remark infoRemark,
+               bt.type_icon infoImg,
+               bt.type_name typeName
         from bill_book_Info bbi
+        inner join bill_type bt on bbi.type_id = bt.type_id
         where bbi.book_id=#{bookId,jdbcType=NUMERIC}
         <if test="userName != null">
             and bbi.user_id=#{userId,jdbcType=INTEGER}

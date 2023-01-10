@@ -3,10 +3,10 @@
 <mapper namespace="com.cloudfly.start.bill.mapper.BillBookMapper">
 
     <select id="queryBillByUserId" resultType="com.cloudfly.start.bill.entity.BillBook" parameterType="java.lang.Integer">
-        select book.book_name as bookName,
-        book.create_date as createDate,
-        book.book_id as bookId,
-        book.book_type book_type
+        select book.book_id bookId,
+                book.create_date createDate,
+                book.book_name bookName,
+                book.book_type bookType
         from bill_book book
         where book.user_id = ${userId}
         union all

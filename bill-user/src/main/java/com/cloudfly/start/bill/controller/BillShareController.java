@@ -45,8 +45,8 @@ public class BillShareController {
        for(int i=0;i<4;i++){
            Map<String,String> map=new HashMap<>();
            map.put("userId",(i+1)+"");
-           map.put("userName","老六");
-           map.put("userImg","老六");
+           map.put("userName","老王大哥");
+           map.put("userImg","../../../static/wechat.jpg");
            map.put("bookId",(i+1)+"");
 
            if(i==0){

@@ -3,6 +3,7 @@ package com.cloudfly.start.bill.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.cloudfly.start.bill.contants.CommonContant;
+import com.cloudfly.start.bill.dao.BillBookInfoDao;
 import com.cloudfly.start.bill.entity.BillBookInfo;
 import com.cloudfly.start.bill.entity.BillUser;
 import com.cloudfly.start.bill.mapper.BillBookInfoMapper;
@@ -67,7 +68,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
     @Override
     public Map<String,Object> queryBillDetailsCustomize(Integer bookId, String infoRemark,Date startTime, Date endTime,
                                                         BigDecimal startMoney, BigDecimal endMoney,String userName) {
-        List<BillBookInfo> billBookInfos=billBookInfoMapper.queryBillDetailsCustomize(bookId,infoRemark,startTime,
+        List<BillBookInfoDao> billBookInfos=billBookInfoMapper.queryBillDetailsCustomize(bookId,infoRemark,startTime,
                 endTime, startMoney, endMoney,userName);
         BigDecimal totalIn = new BigDecimal(0).setScale(2, RoundingMode.HALF_UP);
         BigDecimal totalOut = new BigDecimal(0).setScale(2, RoundingMode.HALF_UP);
@@ -75,10 +76,10 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
         Map<String,Object> details=new HashMap<>();
         SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
         List<Map<String,Object>> detailsList=new ArrayList<>();
-        List<BillBookInfo> bbiList=new ArrayList<>();
+        List<BillBookInfoDao> bbiList=new ArrayList<>();
         for(int i=0;i<billBookInfos.size()-1;i++){
-            BillBookInfo bbis=billBookInfos.get(i);
-            BillBookInfo bbid=billBookInfos.get(i);
+            BillBookInfoDao bbis=billBookInfos.get(i);
+            BillBookInfoDao bbid=billBookInfos.get(i);
             String bbisDay=sdf.format(bbis.getInfoDate());
             String bbidDay=sdf.format(bbid.getInfoDate());
             if(bbis.getInfoPayType()==1){
@@ -94,7 +95,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
                 concatDayInOrOut(bbis,details);
                 bbiList.add(bbis);
             }else{
-                concatDayInOrOut(bbis,details);
+                        concatDayInOrOut(bbis,details);
                 bbiList.add(bbis);
                 details.put("infoDate",bbis.getInfoDate());
                 details.put("bookInfos",bbiList);
@@ -129,7 +130,7 @@ public class BillBookInfoServiceImpl extends ServiceImpl<BillBookInfoMapper, Bil
         return result;
     }
 
-    private void concatDayInOrOut(BillBookInfo bbi,Map<String,Object> details){
+    private void concatDayInOrOut(BillBookInfoDao bbi,Map<String,Object> details){
         if(bbi.getInfoPayType()==1){
             details.put("dayIn",((BigDecimal)details.get("dayIn")).add(bbi.getInfoMoney()));
         }else{
