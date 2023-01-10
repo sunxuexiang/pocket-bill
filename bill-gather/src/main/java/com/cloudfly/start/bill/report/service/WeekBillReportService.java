@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -43,11 +44,11 @@ public class WeekBillReportService extends AbstractBillReportService {
         List<Map<String,Object>> resultList= (List<Map<String, Object>>) resultMap.get(CommonContant.RESPONSE_FIELD);
         int preDay=Integer.parseInt(DateUtil.getCurrentDay(countQueryStartTime()));
         int nextDay=Integer.parseInt(DateUtil.getCurrentDay(countQueryEndTime()));
-
-        for(Map<String,Object> map:resultList){
-            int date=Integer.parseInt((String)map.get("date"));
-            if(date<=preDay||date>=nextDay){
-                resultList.remove(map);
+        Iterator<Map<String, Object>> iterator = resultList.iterator();
+        while (iterator.hasNext()) {
+            int date = Integer.parseInt((String)iterator.next().get("date"));
+            if(date<preDay||date>nextDay){
+                iterator.remove();
             }
         }
         return resultMap;

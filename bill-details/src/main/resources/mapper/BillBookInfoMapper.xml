@@ -16,7 +16,7 @@
         select bbi.info_id infoId,
                bbi.book_id bookId,
                bbi.user_id userId,
-               bbi.pay_id payId,
+               bbi.pay_name payName,
                bbi.type_id typeId,
                bbi.info_money infoMoney,
                bbi.info_pay_type infoPayType,
