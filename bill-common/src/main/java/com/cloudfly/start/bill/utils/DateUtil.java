@@ -146,11 +146,6 @@ public class DateUtil {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println(getWeekFirstDay());
-        System.out.println(getWeekLastDay());
-    }
-
     /**
      * 获取本周最后一天
      * @return Date

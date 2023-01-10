@@ -1,5 +1,6 @@
 package com.cloudfly.start.bill.report.service;
 
+import com.cloudfly.start.bill.contants.CommonContant;
 import com.cloudfly.start.bill.entity.BillBookInfo;
 import com.cloudfly.start.bill.report.base.AbstractBillReportService;
 import com.cloudfly.start.bill.utils.DateUtil;
@@ -39,6 +40,16 @@ public class WeekBillReportService extends AbstractBillReportService {
         BigDecimal total=(BigDecimal) resultMap.get("total");
         BigDecimal average=total.divide(new BigDecimal(7),2, RoundingMode.HALF_UP);
         resultMap.put("average",average);
+        List<Map<String,Object>> resultList= (List<Map<String, Object>>) resultMap.get(CommonContant.RESPONSE_FIELD);
+        int preDay=Integer.parseInt(DateUtil.getCurrentDay(countQueryStartTime()));
+        int nextDay=Integer.parseInt(DateUtil.getCurrentDay(countQueryEndTime()));
+
+        for(Map<String,Object> map:resultList){
+            int date=Integer.parseInt((String)map.get("date"));
+            if(date<=preDay||date>=nextDay){
+                resultList.remove(map);
+            }
+        }
         return resultMap;
     }
 
