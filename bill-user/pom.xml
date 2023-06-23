@@ -4,14 +4,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>bill-user</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<name>bill-user</name>
 	<description>pocket bill for user private service</description>
 
 	<parent>
 		<groupId>com.cloudfly.start.bill</groupId>
 		<artifactId>pocket-bill</artifactId>
-		<version>1.0-SNAPSHOT</version>
+		<version>${revision}</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 
@@ -22,7 +21,7 @@
 		<dependency>
 			<groupId>com.cloudfly.start.bill</groupId>
 			<artifactId>bill-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<dependency>

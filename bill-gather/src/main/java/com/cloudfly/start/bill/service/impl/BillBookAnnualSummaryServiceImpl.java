@@ -58,13 +58,20 @@ public class BillBookAnnualSummaryServiceImpl implements BillBookAnnualSummarySe
         result.put("yearTotalOut",yearTotalOut.setScale(2, RoundingMode.HALF_UP));
         result.put("yearTotalBalance",yearTotalIn.subtract(yearTotalOut).setScale(2, RoundingMode.HALF_UP));
 
-        Collections.sort(resultList, new Comparator<Map<String,BigDecimal>>() {
-            @Override
-            public int compare(Map<String, BigDecimal> o1, Map<String, BigDecimal> o2) {
-                return Integer.parseInt(String.valueOf(o2.get("billMonth")))
-                        -Integer.parseInt(String.valueOf(o1.get("billMonth")));
-            }
-        });
+//        Collections.sort(resultList, new Comparator<Map<String,BigDecimal>>() {
+//            @Override
+//            public int compare(Map<String, BigDecimal> o1, Map<String, BigDecimal> o2) {
+//                return Integer.parseInt(String.valueOf(o2.get("billMonth")))
+//                        -Integer.parseInt(String.valueOf(o1.get("billMonth")));
+//            }
+//        });
+
+        Collections.sort(resultList,
+            (Map<String, BigDecimal> o1, Map<String, BigDecimal> o2) ->
+                     Integer.parseInt(String.valueOf(o2.get("billMonth")))
+                        -Integer.parseInt(String.valueOf(o1.get("billMonth")))
+
+        );
 
         result.put(CommonContant.DATA_FIELD,resultList);
 
