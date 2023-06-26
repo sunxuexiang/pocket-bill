@@ -122,7 +122,6 @@
 	</dependencyManagement>
 
 	<build>
-
 		<plugins>
 			<!-- compile plugin -->
 			<plugin>
