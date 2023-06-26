@@ -35,7 +35,7 @@ public class GlobalExceptionAopCatch {
             return joinPoint.proceed();
         }catch (Exception e){
             MethodSignature methodSignature = (MethodSignature) joinPoint.getSignature();
-            String methodName=methodSignature.getMethod().getDeclaringClass().getName()+"#"+
+            String methodName = methodSignature.getMethod().getDeclaringClass().getName()+"#"+
                     methodSignature.getMethod().getName();
             logger.error(methodName+" occur exception:{}", ExceptionUtils.getStackTrace(e));
             throw e;
